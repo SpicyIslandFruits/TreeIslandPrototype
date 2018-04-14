@@ -55,6 +55,4 @@ public class MainActivity extends AppCompatActivity{
         super.onDestroy();
         realm.close();
     }
-
-    //ちんこ
 }
