@@ -2,6 +2,7 @@ package com.example.minor.prototype10.Weapons;
 
 public class SampleWeapon {
     private int atk = 1;
+
     public void skill1(){
 
     }
