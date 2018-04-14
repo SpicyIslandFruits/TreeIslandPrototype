@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.minor.prototype10.Models.PlayerInfo;
+
 import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity{

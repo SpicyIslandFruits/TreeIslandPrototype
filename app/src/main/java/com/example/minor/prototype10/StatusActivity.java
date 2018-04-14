@@ -8,6 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.minor.prototype10.StatusActivityFragments.EquipmentFragment;
+import com.example.minor.prototype10.StatusActivityFragments.ItemFragment;
+import com.example.minor.prototype10.StatusActivityFragments.SkillFragment;
+import com.example.minor.prototype10.StatusActivityFragments.StatusFragment;
+
 public class StatusActivity extends AppCompatActivity {
     ImageButton statusButton;
     ImageButton equipmentButton;

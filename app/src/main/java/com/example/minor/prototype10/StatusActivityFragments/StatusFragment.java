@@ -1,4 +1,4 @@
-package com.example.minor.prototype10;
+package com.example.minor.prototype10.StatusActivityFragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.minor.prototype10.Models.PlayerInfo;
+import com.example.minor.prototype10.R;
 
 import io.realm.Realm;
 
