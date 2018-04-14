@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity{
         try {
             realm.beginTransaction();
             playerInfo = realm.createObject(PlayerInfo.class, new String("player"));
+            playerInfo.setPlayerLevel(0);
             playerInfo.setPosition(1);
             playerInfo.setMoney(100);
             playerInfo.setMaxHP(100);
