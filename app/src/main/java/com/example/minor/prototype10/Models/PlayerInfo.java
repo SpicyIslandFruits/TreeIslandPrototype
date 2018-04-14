@@ -1,3 +1,4 @@
+
 package com.example.minor.prototype10.Models;
 
 import io.realm.RealmList;

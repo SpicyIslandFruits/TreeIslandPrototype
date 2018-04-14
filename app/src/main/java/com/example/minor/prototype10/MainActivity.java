@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity{
         startActivity(new Intent(this, StatusActivity.class));
     }
 
+    //実際はRealmからレベルを受け取ってonLevelChangedメソッドで初期化します
     public void createSaveData(){
         try {
             realm.beginTransaction();
