@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity{
             playerInfo.setATK(100);
             playerInfo.setDF(100);
             playerInfo.setLUK(100);
+            playerInfo.setWeaponId(0);
             realm.commitTransaction();
         }catch (Exception e){
             realm.cancelTransaction();

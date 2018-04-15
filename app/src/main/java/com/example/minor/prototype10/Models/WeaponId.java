@@ -5,7 +5,7 @@ import io.realm.annotations.PrimaryKey;
 
 public class WeaponId extends RealmObject{
     @PrimaryKey
-    private String weapon;
+    private String Name;
 
     private int weaponId;
 

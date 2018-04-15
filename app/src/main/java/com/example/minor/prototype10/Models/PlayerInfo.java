@@ -1,4 +1,3 @@
-
 package com.example.minor.prototype10.Models;
 
 import io.realm.RealmList;
@@ -33,9 +32,10 @@ public class PlayerInfo extends RealmObject {
     private int mLUK;
     private int fLUK;
     private RealmList<ArmorId> armorIds;
-    private int armor;
+    private int armorId;
     private RealmList<WeaponId> weaponIds;
-    private int weapon;
+    private int weaponId;
+    private RealmList<ItemId> itemIds;
 
     public String getPlayer() {
         return player;
@@ -245,12 +245,12 @@ public class PlayerInfo extends RealmObject {
         this.armorIds = armorIds;
     }
 
-    public int getArmor() {
-        return armor;
+    public int getArmorId() {
+        return armorId;
     }
 
-    public void setArmor(int armor) {
-        this.armor = armor;
+    public void setArmorId(int armor) {
+        this.armorId = armorId;
     }
 
     public RealmList<WeaponId> getWeaponIds() {
@@ -261,11 +261,11 @@ public class PlayerInfo extends RealmObject {
         this.weaponIds = weaponIds;
     }
 
-    public int getWeapon() {
-        return weapon;
+    public int getWeaponId() {
+        return weaponId;
     }
 
-    public void setWeapon(int weapon) {
-        this.weapon = weapon;
+    public void setWeaponId(int weapon) {
+        this.weaponId = weaponId;
     }
 }

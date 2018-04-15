@@ -1,7 +1,19 @@
 package com.example.minor.prototype10.Weapons;
 
-public class SampleWeapon {
+public class SampleWeapon implements SuperWeapon{
+    public String name = "SampleWeapon";
+    private int id = 1;
     private int atk = 1;
+
+    @Override
+    public void setName() {
+
+    }
+
+    @Override
+    public void setAtk() {
+
+    }
 
     public void skill1(){
 
