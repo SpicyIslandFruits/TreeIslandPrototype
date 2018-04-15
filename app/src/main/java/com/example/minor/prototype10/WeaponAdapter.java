@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.example.minor.prototype10.Models.PlayerInfo;
 import com.example.minor.prototype10.Models.WeaponId;
-import com.example.minor.prototype10.Weapons.SuperWeapon;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
@@ -31,7 +30,6 @@ public class WeaponAdapter extends RealmBaseAdapter<WeaponId> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        SuperWeapon weapon;
 
         if(convertView == null){
             convertView = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
@@ -41,7 +39,7 @@ public class WeaponAdapter extends RealmBaseAdapter<WeaponId> {
         }else{
             viewHolder = (ViewHolder)convertView.getTag();
         }
-
+        //書き間違い。ListViewに表示する武器はRealmList<WeaponId>に保存されている。WeaponIdは主人公が装備しているもの。
         WeaponId weaponIdClass = adapterData.get(position);
         realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
@@ -52,7 +50,7 @@ public class WeaponAdapter extends RealmBaseAdapter<WeaponId> {
             }
         });
         makeData = new MakeData();
-        weapon = makeData.makeWeaponFromId(weaponId);
-        return null;
+        viewHolder.name.setText(makeData.makeWeaponFromId(weaponId).getName());
+        return convertView;
     }
 }
