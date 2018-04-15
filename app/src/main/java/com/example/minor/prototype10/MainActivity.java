@@ -10,6 +10,8 @@ import com.example.minor.prototype10.Models.PlayerInfo;
 
 import io.realm.Realm;
 
+//西岡参上
+
 public class MainActivity extends AppCompatActivity{
     Realm realm;
     MapInfo mapInfo;
