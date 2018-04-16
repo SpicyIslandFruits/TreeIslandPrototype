@@ -16,4 +16,12 @@ public class ArmorId extends RealmObject{
     public void setArmorId(int armorId) {
         this.armorId = armorId;
     }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
 }

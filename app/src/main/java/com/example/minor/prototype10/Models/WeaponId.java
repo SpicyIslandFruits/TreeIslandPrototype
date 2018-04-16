@@ -16,4 +16,12 @@ public class WeaponId extends RealmObject{
     public void setWeaponId(int weaponId) {
         this.weaponId = weaponId;
     }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
 }

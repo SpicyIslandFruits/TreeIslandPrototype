@@ -7,12 +7,16 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.minor.prototype10.Models.PlayerInfo;
+import com.example.minor.prototype10.Models.WeaponId;
 import com.example.minor.prototype10.R;
+import com.example.minor.prototype10.WeaponAdapter;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class StatusFragment extends Fragment {
     Realm realm;
@@ -55,6 +59,7 @@ public class StatusFragment extends Fragment {
         atkValue.setText(String.valueOf(ATK));
         dfValue.setText(String.valueOf(DF));
         lukValue.setText(String.valueOf(LUK));
+
     }
 
     //a,bが不足

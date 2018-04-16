@@ -7,8 +7,11 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.minor.prototype10.Models.PlayerInfo;
+import com.example.minor.prototype10.Models.WeaponId;
+import com.example.minor.prototype10.Weapons.SampleWeapon;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity{
     Realm realm;
@@ -48,6 +51,12 @@ public class MainActivity extends AppCompatActivity{
             playerInfo.setDF(100);
             playerInfo.setLUK(100);
             playerInfo.setWeaponId(0);
+            WeaponId weaponId = realm.createObject(WeaponId.class, new String("sampleWeapon"));
+            weaponId.setWeaponId(0);
+            playerInfo.getWeaponIds().add(weaponId);
+            weaponId = realm.createObject(WeaponId.class, new String("SampleWeapon2"));
+            weaponId.setWeaponId(1);
+            playerInfo.getWeaponIds().add(weaponId);
             realm.commitTransaction();
         }catch (Exception e){
             realm.cancelTransaction();

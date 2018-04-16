@@ -6,20 +6,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.minor.prototype10.Models.ArmorId;
 import com.example.minor.prototype10.Models.PlayerInfo;
-import com.example.minor.prototype10.Models.WeaponId;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.RealmBaseAdapter;
-import io.realm.RealmResults;
 
 //Realmから名前を取得しているだけ
-public class WeaponAdapter extends RealmBaseAdapter<WeaponId> {
+public class ArmorAdapter extends RealmBaseAdapter<ArmorId> {
     private static class ViewHolder{
-        TextView weaponName;
+        TextView armorName;
     }
-    public WeaponAdapter(@Nullable OrderedRealmCollection<WeaponId> data) {
+
+    public ArmorAdapter(@Nullable OrderedRealmCollection<ArmorId> data) {
         super(data);
     }
 
@@ -30,14 +30,14 @@ public class WeaponAdapter extends RealmBaseAdapter<WeaponId> {
         if(convertView == null){
             convertView = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.weaponName = convertView.findViewById(android.R.id.text1);
+            viewHolder.armorName = convertView.findViewById(android.R.id.text1);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        WeaponId weaponId = adapterData.get(position);
-        viewHolder.weaponName.setText(weaponId.getName());
+        ArmorId armorId = adapterData.get(position);
+        viewHolder.armorName.setText(armorId.getName());
         return convertView;
     }
 }
