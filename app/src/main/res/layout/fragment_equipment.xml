@@ -103,7 +103,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toTopOf="@+id/guideline27"
             app:layout_constraintEnd_toEndOf="@+id/equipment_status"
-            app:layout_constraintStart_toStartOf="@+id/guideline23"
+            app:layout_constraintStart_toStartOf="@+id/guideline37"
             app:layout_constraintTop_toTopOf="@+id/guideline21" />
 
         <TextView
@@ -119,7 +119,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toTopOf="@+id/guideline28"
             app:layout_constraintEnd_toEndOf="@+id/equipment_status"
-            app:layout_constraintStart_toStartOf="@+id/guideline23"
+            app:layout_constraintStart_toStartOf="@+id/guideline37"
             app:layout_constraintTop_toTopOf="@+id/guideline20" />
 
         <android.support.constraint.Guideline
@@ -285,11 +285,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:src="@android:color/holo_red_dark"
             app:layout_constraintBottom_toTopOf="@+id/guideline27"
             app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline37"
             app:layout_constraintStart_toStartOf="@+id/guideline23"
             app:layout_constraintTop_toTopOf="@+id/guideline21" />
 
@@ -298,11 +300,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:src="@android:color/black"
             app:layout_constraintBottom_toTopOf="@+id/guideline28"
             app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline37"
             app:layout_constraintStart_toStartOf="@+id/guideline23"
             app:layout_constraintTop_toTopOf="@+id/guideline20" />
 
@@ -320,19 +324,21 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline29"
             app:layout_constraintDimensionRatio=""
             app:layout_constraintEnd_toStartOf="@+id/guideline26"
-            app:layout_constraintStart_toEndOf="@+id/equiped_weapon_image"
+            app:layout_constraintStart_toStartOf="@+id/guideline35"
             app:layout_constraintTop_toTopOf="@+id/guideline21" />
 
         <ImageView
             android:id="@+id/equiped_weapon_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:src="@android:color/holo_red_dark"
             app:layout_constraintBottom_toTopOf="@+id/guideline29"
             app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline35"
             app:layout_constraintStart_toStartOf="@+id/guideline25"
             app:layout_constraintTop_toTopOf="@+id/guideline21" />
 
@@ -349,19 +355,21 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toTopOf="@+id/guideline29"
             app:layout_constraintEnd_toStartOf="@+id/guideline19"
-            app:layout_constraintStart_toEndOf="@+id/equiped_armor_image"
+            app:layout_constraintStart_toStartOf="@+id/guideline36"
             app:layout_constraintTop_toTopOf="@+id/guideline21" />
 
         <ImageView
             android:id="@+id/equiped_armor_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:src="@android:color/background_dark"
             app:layout_constraintBottom_toTopOf="@+id/guideline29"
             app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline36"
             app:layout_constraintStart_toStartOf="@+id/guideline26"
             app:layout_constraintTop_toTopOf="@+id/guideline21" />
 
@@ -390,6 +398,27 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline19"
             app:layout_constraintStart_toStartOf="@+id/guideline26"
             app:layout_constraintTop_toTopOf="@+id/guideline29" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.07" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.38" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.71" />
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
