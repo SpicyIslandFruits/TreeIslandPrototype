@@ -4,6 +4,19 @@ public class SampleWeapon2 implements WeaponInterface {
     private int id = 1;
     private String name = "SampleWeapon2";
     private int atk = 2;
+    private String skill1Info = "2割アタック、攻撃力の2割の威力で攻撃";
+    private String skill2Info = "3割アタック、攻撃力の3割の威力で攻撃";
+    private String skill3Info = "4割アタック、攻撃力の4割の威力で攻撃";
+
+    public void skill1(){
+
+    }
+    public void skill2(){
+
+    }
+    public void skill3(){
+
+    }
 
     @Override
     public String getName() {
@@ -15,16 +28,23 @@ public class SampleWeapon2 implements WeaponInterface {
         return atk;
     }
 
-    public void skill1(){
-
+    @Override
+    public int getId() {
+        return id;
     }
-    public void skill2(){
 
+    @Override
+    public String getSkill1Info() {
+        return skill1Info;
     }
-    public void skill3(){
 
+    @Override
+    public String getSkill2Info() {
+        return skill2Info;
     }
-    public void skill4(){
 
+    @Override
+    public String getSkill3Info() {
+        return skill3Info;
     }
 }

@@ -25,9 +25,7 @@ import io.realm.RealmResults;
 
 /*
 * view.findViewById書く
-* 詳細画面に武器のatkとスキルを表示する処理を武器クラスの中に描く、まずインターフェースを完成させる
 * インターフェースの変数を使っているためインターフェース内で定義したメソッド以外使えないことに注意
-* onItemClickの中にMakeDataから武器のインスタンスを作成し、詳細画面に表示させる処理を描く
 * 防具についても同様
 */
 
@@ -62,6 +60,10 @@ public class EquipmentFragment extends Fragment {
         armorList = (ListView) view.findViewById(R.id.armor_list);
         equipedWeapon = (TextView) view.findViewById(R.id.equiped_weapon);
         equipedArmor = (TextView) view.findViewById(R.id.equiped_armor);
+        weaponATK = (TextView) view.findViewById(R.id.weapon_atk);
+        weaponSkill1 = (TextView) view.findViewById(R.id.weapon_skill1);
+        weaponSkill2 = (TextView) view.findViewById(R.id.weapon_skill2);
+        weaponSkill3 = (TextView) view.findViewById(R.id.weapon_skill3);
         weaponIds = realm.where(WeaponId.class).findAll();
         armorIds = realm.where(ArmorId.class).findAll();
         weaponAdapter = new WeaponAdapter(weaponIds);
@@ -72,6 +74,10 @@ public class EquipmentFragment extends Fragment {
         weaponId = playerInfo.getWeaponId();
         weapon = makeData.makeWeaponFromId(weaponId);
         equipedWeapon.setText(weapon.getName());
+        weaponATK.setText("攻撃力:"+String.valueOf(weapon.getAtk()));
+        weaponSkill1.setText(weapon.getSkill1Info());
+        weaponSkill2.setText(weapon.getSkill2Info());
+        weaponSkill3.setText(weapon.getSkill3Info());
 
         weaponList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -87,6 +93,10 @@ public class EquipmentFragment extends Fragment {
                 });
                 weapon = makeData.makeWeaponFromId(weaponId);
                 equipedWeapon.setText(weapon.getName());
+                weaponATK.setText("攻撃力:"+String.valueOf(weapon.getAtk()));
+                weaponSkill1.setText(weapon.getSkill1Info());
+                weaponSkill2.setText(weapon.getSkill2Info());
+                weaponSkill3.setText(weapon.getSkill3Info());
             }
         });
 
