@@ -1,6 +1,7 @@
 package com.example.minor.prototype10;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -129,7 +130,7 @@ public class MapInfo{
     public void createBossRoom(){
         imageButton1.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {mainText.setText("ボスは未実装です");}
+                public void onClick(View v) {mMain.startActivity(new Intent(mMain, BattleActivity.class));}
             });
         OnClickDungeonButton onClickDungeonButton = new OnClickDungeonButton();
         imageButton2.setOnClickListener(onClickDungeonButton);

@@ -19,7 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StatusActivity" android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".StatusActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".BattleActivity"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

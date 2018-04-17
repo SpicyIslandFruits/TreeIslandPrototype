@@ -7,16 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.minor.prototype10.Models.PlayerInfo;
-import com.example.minor.prototype10.Models.WeaponId;
 import com.example.minor.prototype10.R;
-import com.example.minor.prototype10.WeaponAdapter;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class StatusFragment extends Fragment {
     Realm realm;
@@ -41,7 +37,7 @@ public class StatusFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_status, container, false);
     }
 
-    //aとbが不足しています。
+    //mとfが不足しています。
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -62,7 +58,7 @@ public class StatusFragment extends Fragment {
 
     }
 
-    //a,bが不足
+    //m,f不足
     public void getStatus(){
         realm.executeTransaction(new Realm.Transaction() {
             @Override

@@ -8,10 +8,18 @@ import android.widget.ImageButton;
 
 import com.example.minor.prototype10.Models.PlayerInfo;
 import com.example.minor.prototype10.Models.WeaponId;
-import com.example.minor.prototype10.Weapons.SampleWeapon;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
+
+/*
+* 武器の追加方法(防具、アイテムも同様)
+* 1.武器クラスをWeaponsパッケージに追加、メソッドの実装、ゲッターを見て適当なメンバの追加
+* 2.MakeDataクラスのswitch文にcaseを追加
+* マップの追加方法
+*  1.MapInfoクラス内にcreate(マップ名)メソッドの追加、マップ内での処理を書く
+*  2.MapInfoクラス内にonClickを実装したクラスonClick(マップ名)Buttonを書く
+*  3.追加するマップとつながっているマップのcreate(マップ名)メソッドを編集する
+*/
 
 public class MainActivity extends AppCompatActivity{
     Realm realm;
