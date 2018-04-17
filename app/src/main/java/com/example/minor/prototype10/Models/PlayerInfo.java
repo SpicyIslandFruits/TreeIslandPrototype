@@ -249,7 +249,7 @@ public class PlayerInfo extends RealmObject {
         return armorId;
     }
 
-    public void setArmorId(int armor) {
+    public void setArmorId(int armorId) {
         this.armorId = armorId;
     }
 
@@ -265,7 +265,15 @@ public class PlayerInfo extends RealmObject {
         return weaponId;
     }
 
-    public void setWeaponId(int weapon) {
+    public void setWeaponId(int weaponId) {
         this.weaponId = weaponId;
+    }
+
+    public RealmList<ItemId> getItemIds() {
+        return itemIds;
+    }
+
+    public void setItemIds(RealmList<ItemId> itemIds) {
+        this.itemIds = itemIds;
     }
 }
