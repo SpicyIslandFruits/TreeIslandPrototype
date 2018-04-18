@@ -54,10 +54,14 @@ public class MainActivity extends AppCompatActivity{
             playerInfo.setHP(100);
             playerInfo.setMaxMP(100);
             playerInfo.setMP(100);
-            playerInfo.setSP(100);
-            playerInfo.setATK(100);
+            playerInfo.setSP(10);
+            playerInfo.setfSP(10);
+            playerInfo.setATK(10);
+            playerInfo.setfATK(15);
             playerInfo.setDF(100);
+            playerInfo.setfDF(100);
             playerInfo.setLUK(100);
+            playerInfo.setfLUK(100);
             playerInfo.setWeaponId(0);
             WeaponId weaponId = realm.createObject(WeaponId.class, new String("sampleWeapon"));
             weaponId.setWeaponId(0);
