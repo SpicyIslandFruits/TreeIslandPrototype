@@ -87,8 +87,8 @@ public class BattleActivity extends AppCompatActivity {
         //本来はrealmからデータを受け取って表示
         spBar.setProgress(100-60);
         mpBar.setProgress(100-90);
-        hpBar.setProgress(80);
-        breakGage.setData(90, "%", ContextCompat.getColor(this, R.color.colorAccent), 90, true);
+        hpBar.setProgress(100);
+        breakGage.setData(50, "%", ContextCompat.getColor(this, R.color.colorAccent), 50, true);
     }
 
     //PlayerSkillクラスとWeaponクラスからskillを受け取って実行し、tempに処理後のデータを保存
@@ -118,11 +118,11 @@ public class BattleActivity extends AppCompatActivity {
             case 7:
                 break;
         }
-        tempPlayerStatus = sampleBoss.setEnemyBehavior(tempPlayerStatus);
     }
 
     //例外処理を書く必要はない
     void onDecision(){
+        tempPlayerStatus = sampleBoss.setEnemyBehavior(tempPlayerStatus);
         hp = tempPlayerStatus[0];
         mp = tempPlayerStatus[1];
         sp = tempPlayerStatus[2];
@@ -141,6 +141,7 @@ public class BattleActivity extends AppCompatActivity {
     //プログレスバーの値を変更する
     void executeBattle(){
         battleText.setText("自分のHPは" + String.valueOf(hp) + "敵のHPは" + String.valueOf(enemyHp));
+        hpBar.setProgress(hp);
         if(hp<=0 ||enemyHp<=0){
             finish();
         }

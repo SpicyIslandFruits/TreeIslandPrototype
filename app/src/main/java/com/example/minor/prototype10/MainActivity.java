@@ -68,7 +68,9 @@ public class MainActivity extends AppCompatActivity{
             playerInfo.getWeaponIds().add(weaponId);
             weaponId = realm.createObject(WeaponId.class, new String("SampleWeapon2"));
             weaponId.setWeaponId(1);
-            playerInfo.getWeaponIds().add(weaponId);
+            playerInfo.getWeaponIds(
+
+            ).add(weaponId);
             realm.commitTransaction();
         }catch (Exception e){
             realm.cancelTransaction();
