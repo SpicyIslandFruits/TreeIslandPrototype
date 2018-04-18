@@ -12,9 +12,8 @@ import com.example.minor.prototype10.Models.PlayerInfo;
 import io.realm.Realm;
 
 /*
-*プログレスバーには一時的に値を入れてあります
-*配列に値をセットする時はhp,mp,sp,atk,df,lukの順番でセットします
-*主人公がスキルボタンを押すと同時に変数temp~に対して処理が行われます
+* 配列に値をセットする時はhp,mp,sp,atk,df,lukの順番でセットします
+* 主人公がスキルボタンを押すと同時に変数temp~に対して処理が行われます
 * 主人公が行動を決定するときにtempの値を実際の値に代入します
 */
 public class BattleActivity extends AppCompatActivity {
