@@ -1,9 +1,8 @@
 package com.example.minor.prototype10;
 
-import com.example.minor.prototype10.Enemys.EnemyInterface;
-import com.example.minor.prototype10.Weapons.WeaponInterface;
 import com.example.minor.prototype10.Weapons.SampleWeapon;
 import com.example.minor.prototype10.Weapons.SampleWeapon2;
+import com.example.minor.prototype10.Weapons.WeaponInterface;
 
 /*
 * このクラスのメソッドは長くなるので閉じておく
@@ -20,6 +19,8 @@ public class MakeData {
     public void makePlayerStatusFromLevel(int level){
 
     }
+
+    public void makePlayerSkillFromId(int id){}
 
     public void makeEnemyFromId(int id){
 

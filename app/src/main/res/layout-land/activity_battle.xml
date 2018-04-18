@@ -258,7 +258,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline46" />
 
-    <com.example.minor.prototype10.SimpleGaugeView
+    <com.example.minor.prototype10.GaugeView
         android:id="@+id/break_gage"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -289,5 +289,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline46"
         app:layout_constraintTop_toTopOf="@+id/guideline47" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.93" />
+
+    <ImageButton
+        android:id="@+id/decision_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline48"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline40"
+        app:layout_constraintTop_toTopOf="@+id/guideline38"
+        app:srcCompat="@android:color/holo_blue_bright" />
 
 </android.support.constraint.ConstraintLayout>

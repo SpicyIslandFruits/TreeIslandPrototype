@@ -4,6 +4,10 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
+/*
+* f...は武器を装備した状態のステータス
+* m...はフィールドバフがかかった状態のステータス
+*/
 public class PlayerInfo extends RealmObject {
     @PrimaryKey
     private String player;
@@ -36,6 +40,11 @@ public class PlayerInfo extends RealmObject {
     private RealmList<WeaponId> weaponIds;
     private int weaponId;
     private RealmList<ItemId> itemIds;
+    private RealmList<PlayerSkillId> playerSkillIds;
+    private int playerSkill1;
+    private int playerSkill2;
+    private int playerSkill3;
+    private int playerSkill4;
 
     public String getPlayer() {
         return player;
@@ -275,5 +284,45 @@ public class PlayerInfo extends RealmObject {
 
     public void setItemIds(RealmList<ItemId> itemIds) {
         this.itemIds = itemIds;
+    }
+
+    public RealmList<PlayerSkillId> getPlayerSkillIds() {
+        return playerSkillIds;
+    }
+
+    public void setPlayerSkillIds(RealmList<PlayerSkillId> playerSkillIds) {
+        this.playerSkillIds = playerSkillIds;
+    }
+
+    public int getPlayerSkill1() {
+        return playerSkill1;
+    }
+
+    public void setPlayerSkill1(int playerSkill1) {
+        this.playerSkill1 = playerSkill1;
+    }
+
+    public int getPlayerSkill2() {
+        return playerSkill2;
+    }
+
+    public void setPlayerSkill2(int playerSkill2) {
+        this.playerSkill2 = playerSkill2;
+    }
+
+    public int getPlayerSkill3() {
+        return playerSkill3;
+    }
+
+    public void setPlayerSkill3(int playerSkill3) {
+        this.playerSkill3 = playerSkill3;
+    }
+
+    public int getPlayerSkill4() {
+        return playerSkill4;
+    }
+
+    public void setPlayerSkill4(int playerSkill4) {
+        this.playerSkill4 = playerSkill4;
     }
 }
