@@ -148,7 +148,6 @@ public class BattleActivity extends AppCompatActivity {
 
     //どちらかのhpが0以下になったらリザルト画面を表示する処理
     //一時的にbattleTextに数値を表示しているが、実際はバーの値を変更
-    //プログレスバーの値を変更する
     void executeBattle(){
         battleText.setText("自分のHPは" + String.valueOf(hp) + "敵のHPは" + String.valueOf(enemyHp));
         hpBar.setProgress(hp);
