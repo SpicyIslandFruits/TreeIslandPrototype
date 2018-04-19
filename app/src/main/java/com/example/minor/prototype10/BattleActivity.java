@@ -32,7 +32,7 @@ public class BattleActivity extends AppCompatActivity {
     WeaponInterface weapon;
     ImageButton decisionButton, normalAttackButton,skillButton1, skillButton2, skillButton3;
     ImageButton playerSkill1Button, playerSkill2Button, playerSkill3Button, playerSkill4Button;
-    private int[] tempPlayerStatus, tempEnemyStatus;
+    public static int[] tempPlayerStatus, tempEnemyStatus;
     private int hp, mp, sp, atk, df, luk, enemyHp, enemySp, enemyAtk, enemyDf, enemyLuk;
     private int turnCount;
 
@@ -56,6 +56,7 @@ public class BattleActivity extends AppCompatActivity {
         battleText = (TextView) findViewById(R.id.battle_text);
         decisionButton = (ImageButton) findViewById(R.id.decision_button);
         normalAttackButton = (ImageButton) findViewById(R.id.normal_attack);
+        skillButton1 = (ImageButton) findViewById(R.id.skill1);
         decisionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,9 +70,17 @@ public class BattleActivity extends AppCompatActivity {
                 setPlayerBehavior(0);
             }
         });
+        skillButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPlayerBehavior(1);
+                battleText.setText(weapon.getSkill1Info());
+            }
+        });
         hpBar.setMax(100);
         mpBar.setMax(100);
         spBar.setMax(100);
+        breakGage.setData(50, "%", ContextCompat.getColor(this, R.color.colorAccent), 50, true);
         tempPlayerStatus[0] = hp = playerInfo.getHP();
         tempPlayerStatus[1] = mp = playerInfo.getMP();
         tempPlayerStatus[2] = sp = playerInfo.getfSP();
@@ -88,7 +97,6 @@ public class BattleActivity extends AppCompatActivity {
         spBar.setProgress(100-60);
         mpBar.setProgress(100-90);
         hpBar.setProgress(100);
-        breakGage.setData(50, "%", ContextCompat.getColor(this, R.color.colorAccent), 50, true);
     }
 
     //PlayerSkillクラスとWeaponクラスからskillを受け取って実行し、tempに処理後のデータを保存
@@ -98,16 +106,16 @@ public class BattleActivity extends AppCompatActivity {
     void setPlayerBehavior(int num) {
         switch (num){
             case 0:
-                tempEnemyStatus[0] = tempEnemyStatus[0] - tempPlayerStatus[3];
+                tempEnemyStatus[0] = tempEnemyStatus[0] - (tempPlayerStatus[3]+weapon.getAtk());
                 break;
             case 1:
-                weapon.skill1(tempEnemyStatus);
+                tempEnemyStatus = weapon.skill1(tempEnemyStatus, tempPlayerStatus);
                 break;
             case 2:
-                weapon.skill2(tempEnemyStatus);
+                weapon.skill2(tempEnemyStatus, tempPlayerStatus);
                 break;
             case 3:
-                weapon.skill3(tempEnemyStatus);
+                weapon.skill3(tempEnemyStatus, tempPlayerStatus);
                 break;
             case 4:
                 break;
