@@ -13,6 +13,9 @@ import com.example.minor.prototype10.StatusActivityFragments.ItemFragment;
 import com.example.minor.prototype10.StatusActivityFragments.SkillFragment;
 import com.example.minor.prototype10.StatusActivityFragments.StatusFragment;
 
+/**
+ * ほとんどの処理はフラグメントで行うのでここを編集する必要はないです
+ */
 public class StatusActivity extends AppCompatActivity {
     ImageButton statusButton;
     ImageButton equipmentButton;

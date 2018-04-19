@@ -12,7 +12,11 @@ import com.example.minor.prototype10.Models.PlayerInfo;
 import io.realm.Realm;
 
 /**
- * Created by minor on 2018/04/06.
+ * このクラスはこれからとても長くなるのでMainActivityから分離しました
+ * ボタンが押されマップを遷移する際の処理を書いたメソッド(onCreate"マップ名")を書いてください
+ * そのマップとつながっているマップへ移るonClickListenerのインスタンスを登録、画像の変更、BGMの変更、テキストの変更
+ * 乱数によって敵や武器、アイテム、武器の素材、防具、防具の素材などが出現する処理...etc
+ * 完成したメソッドをonClickに登録して実装したクラス(onClick"マップ名"Button)を作ってください
  */
 
 public class MapInfo{
@@ -21,7 +25,7 @@ public class MapInfo{
     private AppCompatActivity mMain;
     private Context mContext;
     TextView mainText;
-    ImageButton imageButton1, imageButton2;
+    ImageButton imageButton1, imageButton2, imageButton3, imageButton4, imageButton5, imageButton6, imageButton7, imageButton8;
     int position;
 
     public MapInfo(AppCompatActivity main) {
@@ -29,6 +33,12 @@ public class MapInfo{
         mainText = (TextView) main.findViewById(R.id.main_text);
         imageButton1 = (ImageButton) main.findViewById(R.id.imageButton1);
         imageButton2 = (ImageButton) main.findViewById(R.id.imageButton2);
+        imageButton3 = (ImageButton) main.findViewById(R.id.imageButton3);
+        imageButton4 = (ImageButton) main.findViewById(R.id.imageButton4);
+        imageButton5 = (ImageButton) main.findViewById(R.id.imageButton5);
+        imageButton6 = (ImageButton) main.findViewById(R.id.imageButton6);
+        imageButton7 = (ImageButton) main.findViewById(R.id.imageButton7);
+        imageButton8 = (ImageButton) main.findViewById(R.id.imageButton8);
     }
 
     public void onGameStart() {
@@ -51,6 +61,7 @@ public class MapInfo{
         }
     }
 
+    //getPositionだとゲッターと名前が被るのでDataになっていますが我慢してください
     public void getData(){
         realm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -61,6 +72,7 @@ public class MapInfo{
         });
     }
 
+    //setPositionだとセッターと名前が被るのでDataになっていますが我慢してください
     public void saveData(){
         realm.executeTransaction(new Realm.Transaction() {
             @Override

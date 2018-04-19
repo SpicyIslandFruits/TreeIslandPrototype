@@ -22,7 +22,7 @@ import io.realm.Realm;
 public class BattleActivity extends AppCompatActivity {
     Realm realm;
     PlayerInfo playerInfo;
-    ProgressBar hpBar, mpBar, spBar;
+    ProgressBar hpBar, mpBar, spBar, enemyHpBar;
     GaugeView breakGage;
     TextView battleText;
     MakeData makeData;
@@ -51,6 +51,7 @@ public class BattleActivity extends AppCompatActivity {
         hpBar = (ProgressBar) findViewById(R.id.hp_bar);
         mpBar = (ProgressBar) findViewById(R.id.mp_bar);
         spBar = (ProgressBar) findViewById(R.id.sp_bar);
+        enemyHpBar = (ProgressBar) findViewById(R.id.enemy_hp_bar);
         breakGage = (GaugeView) findViewById(R.id.break_gage);
         battleText = (TextView) findViewById(R.id.battle_text);
         decisionButton = (ImageButton) findViewById(R.id.decision_button);
@@ -75,10 +76,8 @@ public class BattleActivity extends AppCompatActivity {
                 setPlayerBehavior(1);
             }
         });
-        hpBar.setMax(100);
-        mpBar.setMax(100);
-        spBar.setMax(100);
         breakGage.setData(50, "%", ContextCompat.getColor(this, R.color.colorAccent), 50, true);
+        //ここは後でメソッドにまとめる
         tempAllStatus[0] = hp = playerInfo.getHP();
         tempAllStatus[1] = mp = playerInfo.getMP();
         tempAllStatus[2] = sp = playerInfo.getfSP();
@@ -91,27 +90,32 @@ public class BattleActivity extends AppCompatActivity {
         tempAllStatus[8] = enemyAtk = sampleBoss.getAtk();
         tempAllStatus[9] = enemyDf = sampleBoss.getDf();
         tempAllStatus[10] = enemyLuk = sampleBoss.getLuk();
-        //本来はrealmからデータを受け取って表示
+        //本来はrealmからデータを受け取って表示、spとmpは"最大値-現在の値"という形で書く
+        hpBar.setMax(100);
+        mpBar.setMax(100);
+        spBar.setMax(100);
+        enemyHpBar.setMax(100);
         spBar.setProgress(100-60);
         mpBar.setProgress(100-90);
         hpBar.setProgress(100);
+        enemyHpBar.setProgress(100);
     }
 
     //PlayerSkillクラスとWeaponクラスからskillを受け取って実行し、tempに処理後のデータを保存
-    //引数はnormalAttackなら0,skill1なら1,skill2なら2,playerSkill1なら4...といった感じで数字に対応した技を出す。
+    //case4以降にはtempAllStatus = playerSkill"X".skillを書く
     void setPlayerBehavior(int num) {
         switch (num){
             case 0:
-                tempAllStatus[6] = tempAllStatus[6] - (tempAllStatus[3]+weapon.getAtk());
+                tempAllStatus[6] = tempAllStatus[6] - (tempAllStatus[3]);
                 break;
             case 1:
                 tempAllStatus = weapon.skill1(tempAllStatus);
                 break;
             case 2:
-                weapon.skill2(tempAllStatus);
+                tempAllStatus = weapon.skill2(tempAllStatus);
                 break;
             case 3:
-                weapon.skill3(tempAllStatus);
+                tempAllStatus = weapon.skill3(tempAllStatus);
                 break;
             case 4:
                 break;
@@ -146,6 +150,7 @@ public class BattleActivity extends AppCompatActivity {
     void executeBattle(){
         battleText.setText("自分のHPは" + String.valueOf(hp) + "敵のHPは" + String.valueOf(enemyHp));
         hpBar.setProgress(hp);
+        enemyHpBar.setProgress(enemyHp);
         if(hp<=0 ||enemyHp<=0){
             finish();
         }

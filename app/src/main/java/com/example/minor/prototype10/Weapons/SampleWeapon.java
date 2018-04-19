@@ -1,10 +1,13 @@
 package com.example.minor.prototype10.Weapons;
 
-/*
-* 受け取った味方の配列はhp,mp,sp,atk,df,lukの順
-* 受け取った敵の配列はhp,sp,atk,df,lukの順
-*/
-
+/**
+ * 武器を追加したらMakeDataクラスでswitch文に処理を追加してください
+ * 武器を取得するイベントを書いてください、取得する際にはPlayerInfoのweaponIdではなくRealmList<WeaponId>のほうにidを追加してください
+ * playerAtkにはすでに武器装備時の攻撃力が代入されています
+ * skillメソッドの中に処理を書いてください
+ * skillメソッドの処理はbeginTransactionとcommitTransactionで挟んでください
+ * 後で要素を追加するときは先にSuperWeaponにメソッドを追加してください
+ */
 public class SampleWeapon extends SuperWeapon {
     private static final int id = 0;
     private static final String name = "SampleWeapon";
@@ -15,7 +18,7 @@ public class SampleWeapon extends SuperWeapon {
 
     public int[] skill1(int[] tempAllStatus){
         beginTransaction(tempAllStatus);
-        newEnemyHp = enemyHp - (playerAtk + atk)*2;
+        newEnemyHp = enemyHp - (playerAtk)*2;
         commitTransaction();
         return newAllStatus;
     }

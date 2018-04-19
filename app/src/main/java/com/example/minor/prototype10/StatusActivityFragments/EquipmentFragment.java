@@ -23,11 +23,11 @@ import com.example.minor.prototype10.Weapons.SuperWeapon;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-/*
-* view.findViewById書く
-* インターフェースを見直す
-* 防具についても同様
-*/
+/**
+ * view.findViewById書く
+ * インターフェースを見直す
+ * 防具についても同様
+ */
 
 public class EquipmentFragment extends Fragment {
     Realm realm;

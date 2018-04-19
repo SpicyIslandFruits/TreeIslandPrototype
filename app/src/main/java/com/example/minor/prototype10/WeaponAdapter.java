@@ -6,15 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.minor.prototype10.Models.PlayerInfo;
 import com.example.minor.prototype10.Models.WeaponId;
 
 import io.realm.OrderedRealmCollection;
-import io.realm.Realm;
 import io.realm.RealmBaseAdapter;
-import io.realm.RealmResults;
 
-//Realmから名前を取得しているだけ
+/**
+ * ここを編集する必要はないです
+ */
 public class WeaponAdapter extends RealmBaseAdapter<WeaponId> {
     private static class ViewHolder{
         TextView weaponName;

@@ -7,13 +7,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.minor.prototype10.Models.ArmorId;
-import com.example.minor.prototype10.Models.PlayerInfo;
 
 import io.realm.OrderedRealmCollection;
-import io.realm.Realm;
 import io.realm.RealmBaseAdapter;
 
-//Realmから名前を取得しているだけ
+/**
+ * ここを編集する必要はないです
+ */
 public class ArmorAdapter extends RealmBaseAdapter<ArmorId> {
     private static class ViewHolder{
         TextView armorName;
