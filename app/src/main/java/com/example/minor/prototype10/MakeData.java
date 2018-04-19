@@ -2,7 +2,7 @@ package com.example.minor.prototype10;
 
 import com.example.minor.prototype10.Weapons.SampleWeapon;
 import com.example.minor.prototype10.Weapons.SampleWeapon2;
-import com.example.minor.prototype10.Weapons.WeaponInterface;
+import com.example.minor.prototype10.Weapons.SuperWeapon;
 
 /*
 * このクラスのメソッドは長くなるので閉じておく
@@ -16,6 +16,7 @@ public class MakeData {
     //レベルを受け取ってステータスを生成し、Realmに渡す処理を書く
     //式によって主人公のステータスを生成する
     //前のレベルのステータス × 1.1 ± 乱数.など
+
     public void makePlayerStatusFromLevel(int level){
 
     }
@@ -26,14 +27,16 @@ public class MakeData {
 
     }
 
-    public WeaponInterface makeWeaponFromId(int id){
-        WeaponInterface weapon = new SampleWeapon();
+    public SuperWeapon makeWeaponFromId(int id){
+        int[] tempEnemyStatus = new int[5];
+        int[] tempPlayerStatus = new int[6];
+        SuperWeapon weapon = new SampleWeapon(tempEnemyStatus, tempPlayerStatus);
         switch (id){
             case 0:
-                weapon = new SampleWeapon();
+                weapon = new SampleWeapon(tempEnemyStatus, tempPlayerStatus);
                 break;
             case 1:
-                weapon = new SampleWeapon2();
+                weapon = new SampleWeapon2(tempEnemyStatus, tempPlayerStatus);
                 break;
         }
         return weapon;

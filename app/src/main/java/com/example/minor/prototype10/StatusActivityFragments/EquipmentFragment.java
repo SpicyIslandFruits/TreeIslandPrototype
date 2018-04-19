@@ -18,7 +18,7 @@ import com.example.minor.prototype10.Models.PlayerInfo;
 import com.example.minor.prototype10.Models.WeaponId;
 import com.example.minor.prototype10.R;
 import com.example.minor.prototype10.WeaponAdapter;
-import com.example.minor.prototype10.Weapons.WeaponInterface;
+import com.example.minor.prototype10.Weapons.SuperWeapon;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -35,7 +35,7 @@ public class EquipmentFragment extends Fragment {
     RealmResults<ArmorId> armorIds;
     WeaponId weaponIdInstance;
     MakeData makeData;
-    WeaponInterface weapon;
+    SuperWeapon weapon;
     PlayerInfo playerInfo;
     WeaponAdapter weaponAdapter;
     ArmorAdapter armorAdapter;
@@ -59,6 +59,7 @@ public class EquipmentFragment extends Fragment {
         weaponList = (ListView) view.findViewById(R.id.weapon_list);
         armorList = (ListView) view.findViewById(R.id.armor_list);
         equipedWeapon = (TextView) view.findViewById(R.id.equiped_weapon);
+        weaponName = (TextView) view.findViewById(R.id.weapon_name);
         equipedArmor = (TextView) view.findViewById(R.id.equiped_armor);
         weaponATK = (TextView) view.findViewById(R.id.weapon_atk);
         weaponSkill1 = (TextView) view.findViewById(R.id.weapon_skill1);
@@ -93,6 +94,7 @@ public class EquipmentFragment extends Fragment {
                 });
                 weapon = makeData.makeWeaponFromId(weaponId);
                 equipedWeapon.setText(weapon.getName());
+                weaponName.setText(weapon.getName());
                 weaponATK.setText("攻撃力:"+String.valueOf(weapon.getAtk()));
                 weaponSkill1.setText(weapon.getSkill1Info());
                 weaponSkill2.setText(weapon.getSkill2Info());

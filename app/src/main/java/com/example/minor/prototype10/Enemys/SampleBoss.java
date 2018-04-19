@@ -1,7 +1,7 @@
 package com.example.minor.prototype10.Enemys;
 
 //配列playerStatusの要素の順番はhp,mp,sp,atk,df,luk
-public class SampleBoss implements EnemyInterface {
+public class SampleBoss extends SuperEnemy {
     private int hp = 100, sp = 10, atk = 10, df = 100, luk = 100;
     private int[] tempPlayerStatus, newTempPlayerStatus;
 

@@ -1,6 +1,6 @@
 package com.example.minor .prototype10.Weapons;
 
-public class SampleWeapon2 implements WeaponInterface {
+public class SampleWeapon2 extends SuperWeapon {
     private int id = 1;
     private String name = "SampleWeapon2";
     private int atk = 2;
@@ -9,6 +9,10 @@ public class SampleWeapon2 implements WeaponInterface {
     private String skill1Info = "2割アタック、攻撃力の2割の威力で攻撃";
     private String skill2Info = "3割アタック、攻撃力の3割の威力で攻撃";
     private String skill3Info = "4割アタック、攻撃力の4割の威力で攻撃";
+
+    public SampleWeapon2(int[] tempEnemyStatus, int[] tempPlayerStatus) {
+        super(tempEnemyStatus, tempPlayerStatus);
+    }
 
     public int[] skill1(int[] tempEnemyStatus, int[] tempPlayerStatus){
         return newEnemyStatus;

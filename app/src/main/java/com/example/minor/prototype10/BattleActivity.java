@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.minor.prototype10.Enemys.SampleBoss;
 import com.example.minor.prototype10.Models.PlayerInfo;
-import com.example.minor.prototype10.Weapons.WeaponInterface;
+import com.example.minor.prototype10.Weapons.SuperWeapon;
 
 import io.realm.Realm;
 
@@ -29,7 +29,7 @@ public class BattleActivity extends AppCompatActivity {
     int weaponId;
     //一時的にサンプルボスを使う
     SampleBoss sampleBoss;
-    WeaponInterface weapon;
+    SuperWeapon weapon;
     ImageButton decisionButton, normalAttackButton,skillButton1, skillButton2, skillButton3;
     ImageButton playerSkill1Button, playerSkill2Button, playerSkill3Button, playerSkill4Button;
     public static int[] tempPlayerStatus, tempEnemyStatus;
@@ -74,7 +74,6 @@ public class BattleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setPlayerBehavior(1);
-                battleText.setText(weapon.getSkill1Info());
             }
         });
         hpBar.setMax(100);
@@ -128,7 +127,7 @@ public class BattleActivity extends AppCompatActivity {
         }
     }
 
-    //例外処理を書く必要はない
+    //tempを実際の値に代入
     void onDecision(){
         tempPlayerStatus = sampleBoss.setEnemyBehavior(tempPlayerStatus);
         hp = tempPlayerStatus[0];
@@ -144,7 +143,6 @@ public class BattleActivity extends AppCompatActivity {
         enemyLuk = tempEnemyStatus[4];
     }
 
-    //tempを実際の値に代入する処理
     //どちらかのhpが0以下になったらリザルト画面を表示する処理
     //プログレスバーの値を変更する
     void executeBattle(){
