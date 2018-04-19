@@ -38,10 +38,10 @@ abstract public class SuperEnemy {
     abstract public int getAtk();
     abstract public int getDf();
     abstract public int getLuk();
-    abstract public void skill1(int[] tempAllStatus);
-    abstract public void skill2(int[] tempAllStatus);
-    abstract public void skill3(int[] tempAllStatus);
-    abstract public void skill4(int[] tempAllStatus);
-    abstract int[] setEnemyBehavior(int[] tempAllStatus);
+    abstract protected void skill1(int[] tempAllStatus);
+    abstract protected void skill2(int[] tempAllStatus);
+    abstract protected void skill3(int[] tempAllStatus);
+    abstract protected void skill4(int[] tempAllStatus);
+    abstract public int[] setEnemyBehavior(int[] tempAllStatus);
 
 }

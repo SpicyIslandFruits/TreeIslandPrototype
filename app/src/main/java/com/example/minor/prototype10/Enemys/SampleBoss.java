@@ -30,22 +30,22 @@ public class SampleBoss extends SuperEnemy {
     }
 
     @Override
-    public void skill1(int[] tempAllStatus) {
+    protected void skill1(int[] tempAllStatus) {
         newPlayerHp = playerHp - enemyAtk;
     }
 
     @Override
-    public void skill2(int[] tempAllStatus) {
+    protected void skill2(int[] tempAllStatus) {
 
     }
 
     @Override
-    public void skill3(int[] tempAllStatus) {
+    protected void skill3(int[] tempAllStatus) {
 
     }
 
     @Override
-    public void skill4(int[] tempAllStatus) {
+    protected void skill4(int[] tempAllStatus) {
 
     }
 

@@ -9,16 +9,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.minor.prototype10.Enemys.SampleBoss;
+import com.example.minor.prototype10.Enemys.SuperEnemy;
 import com.example.minor.prototype10.Models.PlayerInfo;
 import com.example.minor.prototype10.Weapons.SuperWeapon;
 
 import io.realm.Realm;
 
-/*
-* 配列に値をセットする時はhp,mp,sp,atk,df,lukの順番でセットします
-* 主人公がスキルボタンを押すと同時に変数temp~に対して処理が行われます
-* 主人公が行動を決定するときにtemp配列の値を実際の値に代入します
-*/
+/**
+ * spの実装、ターンカウントの実装、mpの実装
+ * 敵とのエンカウント方式の実装、intentから敵情報受け取り
+ */
 public class BattleActivity extends AppCompatActivity {
     Realm realm;
     PlayerInfo playerInfo;
@@ -27,8 +27,8 @@ public class BattleActivity extends AppCompatActivity {
     TextView battleText;
     MakeData makeData;
     int weaponId;
-    //一時的にサンプルボスを使う
-    SampleBoss sampleBoss;
+    int enemyId;
+    SuperEnemy enemy;
     SuperWeapon weapon;
     ImageButton decisionButton, normalAttackButton,skillButton1, skillButton2, skillButton3;
     ImageButton playerSkill1Button, playerSkill2Button, playerSkill3Button, playerSkill4Button;
@@ -46,7 +46,8 @@ public class BattleActivity extends AppCompatActivity {
         playerInfo = realm.where(PlayerInfo.class).findFirst();
         weaponId = playerInfo.getWeaponId();
         weapon = makeData.makeWeaponFromId(weaponId);
-        sampleBoss = new SampleBoss();
+        //一時的にサンプルボスを使う、本来はintentから受けとったidを使ってMakeDataクラスのメソッドでインスタンスを取得する
+        enemy = new SampleBoss();
         tempAllStatus = new int[11];
         hpBar = (ProgressBar) findViewById(R.id.hp_bar);
         mpBar = (ProgressBar) findViewById(R.id.mp_bar);
@@ -76,6 +77,7 @@ public class BattleActivity extends AppCompatActivity {
                 setPlayerBehavior(1);
             }
         });
+        //今回は適当に色を入れているが実際は適宜色を作成して代入、色の作成方法は知恵袋参照
         breakGage.setData(50, "%", ContextCompat.getColor(this, R.color.colorAccent), 50, true);
         //ここは後でメソッドにまとめる
         tempAllStatus[0] = hp = playerInfo.getHP();
@@ -85,11 +87,11 @@ public class BattleActivity extends AppCompatActivity {
         tempAllStatus[4] = df = playerInfo.getfDF();
         tempAllStatus[5] = luk = playerInfo.getfLUK();
         //本来はidから生成された敵のステータスだが今回はサンプルボスのステータスを取得
-        tempAllStatus[6] = enemyHp = sampleBoss.getHp();
-        tempAllStatus[7] = enemySp = sampleBoss.getSp();
-        tempAllStatus[8] = enemyAtk = sampleBoss.getAtk();
-        tempAllStatus[9] = enemyDf = sampleBoss.getDf();
-        tempAllStatus[10] = enemyLuk = sampleBoss.getLuk();
+        tempAllStatus[6] = enemyHp = enemy.getHp();
+        tempAllStatus[7] = enemySp = enemy.getSp();
+        tempAllStatus[8] = enemyAtk = enemy.getAtk();
+        tempAllStatus[9] = enemyDf = enemy.getDf();
+        tempAllStatus[10] = enemyLuk = enemy.getLuk();
         //本来はrealmからデータを受け取って表示、spとmpは"最大値-現在の値"という形で書く
         hpBar.setMax(100);
         mpBar.setMax(100);
@@ -130,7 +132,7 @@ public class BattleActivity extends AppCompatActivity {
 
     //tempを実際の値に代入
     void onDecision(){
-        tempAllStatus = sampleBoss.setEnemyBehavior(tempAllStatus);
+        tempAllStatus = enemy.setEnemyBehavior(tempAllStatus);
         hp = tempAllStatus[0];
         mp = tempAllStatus[1];
         sp = tempAllStatus[2];

@@ -17,6 +17,8 @@ import io.realm.Realm;
  * そのマップとつながっているマップへ移るonClickListenerのインスタンスを登録、画像の変更、BGMの変更、テキストの変更
  * 乱数によって敵や武器、アイテム、武器の素材、防具、防具の素材などが出現する処理...etc
  * 完成したメソッドをonClickに登録して実装したクラス(onClick"マップ名"Button)を作ってください
+ * 一定確率で敵と遭遇するメソッドを作る
+ * 敵と遭遇した場合は敵のidをintentによってBattleActivityに渡す
  */
 
 public class MapInfo{
