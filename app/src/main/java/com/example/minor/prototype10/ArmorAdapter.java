@@ -11,9 +11,6 @@ import com.example.minor.prototype10.Models.ArmorId;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;
 
-/**
- * ここを編集する必要はないです
- */
 public class ArmorAdapter extends RealmBaseAdapter<ArmorId> {
     private static class ViewHolder{
         TextView armorName;

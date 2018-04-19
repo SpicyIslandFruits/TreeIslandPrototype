@@ -11,9 +11,6 @@ import com.example.minor.prototype10.Models.WeaponId;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;
 
-/**
- * ここを編集する必要はないです
- */
 public class WeaponAdapter extends RealmBaseAdapter<WeaponId> {
     private static class ViewHolder{
         TextView weaponName;

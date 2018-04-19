@@ -37,7 +37,6 @@ public class StatusFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_status, container, false);
     }
 
-    //mとfが不足しています。
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -58,7 +57,6 @@ public class StatusFragment extends Fragment {
 
     }
 
-    //m,f不足
     public void getStatus(){
         realm.executeTransaction(new Realm.Transaction() {
             @Override

@@ -11,16 +11,6 @@ import com.example.minor.prototype10.Models.PlayerInfo;
 
 import io.realm.Realm;
 
-/**
- * このクラスはこれからとても長くなるのでMainActivityから分離しました
- * ボタンが押されマップを遷移する際の処理を書いたメソッド(onCreate"マップ名")を書いてください
- * そのマップとつながっているマップへ移るonClickListenerのインスタンスを登録、画像の変更、BGMの変更、テキストの変更
- * 乱数によって敵や武器、アイテム、武器の素材、防具、防具の素材などが出現する処理...etc
- * 完成したメソッドをonClickに登録して実装したクラス(onClick"マップ名"Button)を作ってください
- * 一定確率で敵と遭遇するメソッドを作る
- * 敵と遭遇した場合は敵のidをintentによってBattleActivityに渡す
- */
-
 public class MapInfo{
     Realm realm;
     PlayerInfo playerInfo;
@@ -63,7 +53,6 @@ public class MapInfo{
         }
     }
 
-    //getPositionだとゲッターと名前が被るのでDataになっていますが我慢してください
     public void getData(){
         realm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -74,7 +63,6 @@ public class MapInfo{
         });
     }
 
-    //setPositionだとセッターと名前が被るのでDataになっていますが我慢してください
     public void saveData(){
         realm.executeTransaction(new Realm.Transaction() {
             @Override

@@ -5,9 +5,6 @@ import android.app.Application;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-/**
- * Realmの初期データの作成方法が分かれば編集します
- */
 public class MyApplication extends Application {
     @Override
     public void onCreate() {

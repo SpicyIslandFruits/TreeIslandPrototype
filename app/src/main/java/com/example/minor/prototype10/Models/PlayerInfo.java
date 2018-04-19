@@ -4,10 +4,6 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/*
-* f...は武器を装備した状態のステータス
-* m...はフィールドバフがかかった状態のステータス
-*/
 public class PlayerInfo extends RealmObject {
     @PrimaryKey
     private String player;

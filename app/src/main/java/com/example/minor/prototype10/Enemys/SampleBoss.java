@@ -1,11 +1,5 @@
 package com.example.minor.prototype10.Enemys;
 
-/**
- * 最初にクラスのメンバとして敵のステータスを書いてください
- * 次にskillメソッドにスキルの中身を書き、setEnemyBehaviorメソッドに行動パターンを書いてください
- * 行動パターンを書くときはbeginTransactionとcommitTransactionで挟んでください
- * 後で要素を追加するときは先にSuperEnemyにメソッドを追加してください
- */
 public class SampleBoss extends SuperEnemy {
     private static final int hp = 100, sp = 10, atk = 10, df = 100, luk = 100;
 

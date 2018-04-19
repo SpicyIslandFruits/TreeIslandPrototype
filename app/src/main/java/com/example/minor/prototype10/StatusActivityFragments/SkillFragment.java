@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.example.minor.prototype10.R;
 
-
 public class SkillFragment extends Fragment {
     @Nullable
     @Override
