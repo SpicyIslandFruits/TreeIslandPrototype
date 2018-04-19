@@ -1,14 +1,47 @@
 package com.example.minor.prototype10.Enemys;
 
-abstract class SuperEnemy {
-    abstract int getHp();
-    abstract int getSp();
-    abstract int getAtk();
-    abstract int getDf();
-    abstract int getLuk();
-    abstract void skill1();
-    abstract void skill2();
-    abstract void skill3();
-    abstract void skill4();
-    abstract int[] setEnemyBehavior(int[] tempPlayerStatus);
+abstract public class SuperEnemy {
+    protected int playerHp, playerMp, playerSp, playerAtk, playerDf, playerLuk, enemyHp, enemySp, enemyAtk, enemyDf, enemyLuk;
+    protected int newPlayerHp, newPlayerMp, newPlayerSp, newPlayerAtk, newPlayerDf, newPlayerLuk, newEnemyHp, newEnemySp, newEnemyAtk, newEnemyDf, newEnemyLuk;
+    protected int[] newAllStatus, tempAllStatus;
+
+    public void beginTransaction(int[] tempAllStatus){
+        newAllStatus = new int[11];
+        newPlayerHp = playerHp = tempAllStatus[0];
+        newPlayerMp = playerMp = tempAllStatus[1];
+        newPlayerSp = playerSp = tempAllStatus[2];
+        newPlayerAtk = playerAtk = tempAllStatus[3];
+        newPlayerDf = playerDf = tempAllStatus[4];
+        newPlayerLuk = playerLuk = tempAllStatus[5];
+        newEnemyHp = enemyHp = tempAllStatus[6];
+        newEnemySp = enemySp = tempAllStatus[7];
+        newEnemyAtk = enemyAtk = tempAllStatus[8];
+        newEnemyDf = enemyDf = tempAllStatus[9];
+        newEnemyLuk = enemyLuk = tempAllStatus[10];
+    }
+
+    protected void commitTransaction(){
+        newAllStatus[0] = newPlayerHp;
+        newAllStatus[1] = newPlayerMp;
+        newAllStatus[2] = newPlayerSp;
+        newAllStatus[3] = newPlayerAtk;
+        newAllStatus[4] = newPlayerDf;
+        newAllStatus[5] = newPlayerLuk;
+        newAllStatus[6] = newEnemyHp;
+        newAllStatus[7] = newEnemySp;
+        newAllStatus[8] = newEnemyAtk;
+        newAllStatus[9] = newEnemyDf;
+        newAllStatus[10] = newEnemyLuk;
+    }
+    abstract public int getHp();
+    abstract public int getSp();
+    abstract public int getAtk();
+    abstract public int getDf();
+    abstract public int getLuk();
+    abstract public void skill1(int[] tempAllStatus);
+    abstract public void skill2(int[] tempAllStatus);
+    abstract public void skill3(int[] tempAllStatus);
+    abstract public void skill4(int[] tempAllStatus);
+    abstract int[] setEnemyBehavior(int[] tempAllStatus);
+
 }

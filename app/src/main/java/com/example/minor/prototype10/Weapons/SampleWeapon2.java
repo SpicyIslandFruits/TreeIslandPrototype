@@ -1,27 +1,29 @@
 package com.example.minor .prototype10.Weapons;
 
 public class SampleWeapon2 extends SuperWeapon {
-    private int id = 1;
-    private String name = "SampleWeapon2";
-    private int atk = 2;
-    private int[] newEnemyStatus;
-    private int[] tempPlayerStatus;
-    private String skill1Info = "2割アタック、攻撃力の2割の威力で攻撃";
-    private String skill2Info = "3割アタック、攻撃力の3割の威力で攻撃";
-    private String skill3Info = "4割アタック、攻撃力の4割の威力で攻撃";
+    private static final int id = 1;
+    private static final String name = "SampleWeapon2";
+    private static final int atk = 2;
+    private static final String skill1Info = "2割アタック、攻撃力の2割の威力で攻撃";
+    private static final String skill2Info = "3割アタック、攻撃力の3割の威力で攻撃";
+    private static final String skill3Info = "4割アタック、攻撃力の4割の威力で攻撃";
 
-    public SampleWeapon2(int[] tempEnemyStatus, int[] tempPlayerStatus) {
-        super(tempEnemyStatus, tempPlayerStatus);
+    public int[] skill1(int[] tempAllStatus){
+        beginTransaction(tempAllStatus);
+        commitTransaction();
+        return newAllStatus;
     }
 
-    public int[] skill1(int[] tempEnemyStatus, int[] tempPlayerStatus){
-        return newEnemyStatus;
+    public int[] skill2(int[] tempAllStatus){
+        beginTransaction(tempAllStatus);
+        commitTransaction();
+        return newAllStatus;
     }
-    public int[] skill2(int[] tempEnemyStatus, int[] tempPlayerStatus){
-        return newEnemyStatus;
-    }
-    public int[] skill3(int[] tempEnemyStatus, int[] tempPlayerStatus){
-        return newEnemyStatus;
+
+    public int[] skill3(int[] tempAllStatus){
+        beginTransaction(tempAllStatus);
+        commitTransaction();
+        return newAllStatus;
     }
 
     @Override

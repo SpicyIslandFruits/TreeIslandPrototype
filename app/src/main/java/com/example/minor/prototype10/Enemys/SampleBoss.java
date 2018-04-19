@@ -1,9 +1,8 @@
 package com.example.minor.prototype10.Enemys;
 
-//配列playerStatusの要素の順番はhp,mp,sp,atk,df,luk
+/*skillメソッドにスキルの中身を書き、setEnemyBehaviorメソッドに行動パターンを書いてください*/
 public class SampleBoss extends SuperEnemy {
-    private int hp = 100, sp = 10, atk = 10, df = 100, luk = 100;
-    private int[] tempPlayerStatus, newTempPlayerStatus;
+    private static final int hp = 100, sp = 10, atk = 10, df = 100, luk = 100;
 
     public int getHp() {
         return hp;
@@ -26,30 +25,30 @@ public class SampleBoss extends SuperEnemy {
     }
 
     @Override
-    public void skill1() {
-        tempPlayerStatus[0] = tempPlayerStatus[0] - atk;
+    public void skill1(int[] tempAllStatus) {
+        newPlayerHp = playerHp - enemyAtk;
     }
 
     @Override
-    public void skill2() {
-
-    }
-
-    @Override
-    public void skill3() {
+    public void skill2(int[] tempAllStatus) {
 
     }
 
     @Override
-    public void skill4() {
+    public void skill3(int[] tempAllStatus) {
 
     }
 
     @Override
-    public int[] setEnemyBehavior(int[] tempPlayerStatus) {
-        this.tempPlayerStatus = tempPlayerStatus;
-        skill1();
-        newTempPlayerStatus = tempPlayerStatus;
-        return newTempPlayerStatus;
+    public void skill4(int[] tempAllStatus) {
+
+    }
+
+    @Override
+    public int[] setEnemyBehavior(int[] tempAllStatus) {
+        beginTransaction(tempAllStatus);
+        skill1(tempAllStatus);
+        commitTransaction();
+        return newAllStatus;
     }
 }

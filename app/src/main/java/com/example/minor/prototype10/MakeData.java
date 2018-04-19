@@ -28,15 +28,14 @@ public class MakeData {
     }
 
     public SuperWeapon makeWeaponFromId(int id){
-        int[] tempEnemyStatus = new int[5];
-        int[] tempPlayerStatus = new int[6];
-        SuperWeapon weapon = new SampleWeapon(tempEnemyStatus, tempPlayerStatus);
+        int[] tempAllStatus = new int[11];
+        SuperWeapon weapon = new SampleWeapon();
         switch (id){
             case 0:
-                weapon = new SampleWeapon(tempEnemyStatus, tempPlayerStatus);
+                weapon = new SampleWeapon();
                 break;
             case 1:
-                weapon = new SampleWeapon2(tempEnemyStatus, tempPlayerStatus);
+                weapon = new SampleWeapon2();
                 break;
         }
         return weapon;

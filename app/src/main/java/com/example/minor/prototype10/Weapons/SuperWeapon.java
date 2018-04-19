@@ -1,27 +1,41 @@
 package com.example.minor.prototype10.Weapons;
 
 abstract public class SuperWeapon {
-    protected int[] newEnemyStatus;
-    protected int[] newPlayerStatus;
+    protected int playerHp, playerMp, playerSp, playerAtk, playerDf, playerLuk, enemyHp, enemySp, enemyAtk, enemyDf, enemyLuk;
+    protected int newPlayerHp, newPlayerMp, newPlayerSp, newPlayerAtk, newPlayerDf, newPlayerLuk, newEnemyHp, newEnemySp, newEnemyAtk, newEnemyDf, newEnemyLuk;
+    protected int[] newAllStatus;
 
-    public SuperWeapon(int[] tempEnemyStatus, int[] tempPlayerStatus){
-        newEnemyStatus = new int[5];
-        newEnemyStatus[0] = tempEnemyStatus[0];
-        newEnemyStatus[1] = tempEnemyStatus[1];
-        newEnemyStatus[2] = tempEnemyStatus[2];
-        newEnemyStatus[3] = tempEnemyStatus[3];
-        newEnemyStatus[4] = tempEnemyStatus[4];
-        newPlayerStatus = new int[6];
-        newPlayerStatus[0] = tempEnemyStatus[0];
-        newPlayerStatus[1] = tempPlayerStatus[1];
-        newPlayerStatus[2] = tempPlayerStatus[2];
-        newPlayerStatus[3] = tempPlayerStatus[3];
-        newPlayerStatus[4] = tempPlayerStatus[4];
-        newPlayerStatus[5] = tempPlayerStatus[5];
+    public void beginTransaction(int[] tempAllStatus){
+        newAllStatus = new int[11];
+        newPlayerHp = playerHp = tempAllStatus[0];
+        newPlayerMp = playerMp = tempAllStatus[1];
+        newPlayerSp = playerSp = tempAllStatus[2];
+        newPlayerAtk = playerAtk = tempAllStatus[3];
+        newPlayerDf = playerDf = tempAllStatus[4];
+        newPlayerLuk = playerLuk = tempAllStatus[5];
+        newEnemyHp = enemyHp = tempAllStatus[6];
+        newEnemySp = enemySp = tempAllStatus[7];
+        newEnemyAtk = enemyAtk = tempAllStatus[8];
+        newEnemyDf = enemyDf = tempAllStatus[9];
+        newEnemyLuk = enemyLuk = tempAllStatus[10];
     }
-    abstract public int[] skill1(int[] tempEnemyStatus, int[] tempPlayerStatus);
-    abstract public int[] skill2(int[] tempEnemyStatus, int[] tempPlayerStatus);
-    abstract public int[] skill3(int[] tempEnemyStatus, int[] tempPlayerStatus);
+
+    protected void commitTransaction(){
+        newAllStatus[0] = newPlayerHp;
+        newAllStatus[1] = newPlayerMp;
+        newAllStatus[2] = newPlayerSp;
+        newAllStatus[3] = newPlayerAtk;
+        newAllStatus[4] = newPlayerDf;
+        newAllStatus[5] = newPlayerLuk;
+        newAllStatus[6] = newEnemyHp;
+        newAllStatus[7] = newEnemySp;
+        newAllStatus[8] = newEnemyAtk;
+        newAllStatus[9] = newEnemyDf;
+        newAllStatus[10] = newEnemyLuk;
+    }
+    abstract public int[] skill1(int[] tempAllStatus);
+    abstract public int[] skill2(int[] tempAllStatus);
+    abstract public int[] skill3(int[] tempAllStatus);
     abstract public int getId();
     abstract public String getName();
     abstract public int getAtk();

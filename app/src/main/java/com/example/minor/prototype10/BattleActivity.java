@@ -32,7 +32,7 @@ public class BattleActivity extends AppCompatActivity {
     SuperWeapon weapon;
     ImageButton decisionButton, normalAttackButton,skillButton1, skillButton2, skillButton3;
     ImageButton playerSkill1Button, playerSkill2Button, playerSkill3Button, playerSkill4Button;
-    public static int[] tempPlayerStatus, tempEnemyStatus;
+    public int[] tempAllStatus;
     private int hp, mp, sp, atk, df, luk, enemyHp, enemySp, enemyAtk, enemyDf, enemyLuk;
     private int turnCount;
 
@@ -47,8 +47,7 @@ public class BattleActivity extends AppCompatActivity {
         weaponId = playerInfo.getWeaponId();
         weapon = makeData.makeWeaponFromId(weaponId);
         sampleBoss = new SampleBoss();
-        tempPlayerStatus = new int[6];
-        tempEnemyStatus = new int[5];
+        tempAllStatus = new int[11];
         hpBar = (ProgressBar) findViewById(R.id.hp_bar);
         mpBar = (ProgressBar) findViewById(R.id.mp_bar);
         spBar = (ProgressBar) findViewById(R.id.sp_bar);
@@ -80,18 +79,18 @@ public class BattleActivity extends AppCompatActivity {
         mpBar.setMax(100);
         spBar.setMax(100);
         breakGage.setData(50, "%", ContextCompat.getColor(this, R.color.colorAccent), 50, true);
-        tempPlayerStatus[0] = hp = playerInfo.getHP();
-        tempPlayerStatus[1] = mp = playerInfo.getMP();
-        tempPlayerStatus[2] = sp = playerInfo.getfSP();
-        tempPlayerStatus[3] = atk = playerInfo.getfATK();
-        tempPlayerStatus[4] = df = playerInfo.getfDF();
-        tempPlayerStatus[5] = luk = playerInfo.getfLUK();
+        tempAllStatus[0] = hp = playerInfo.getHP();
+        tempAllStatus[1] = mp = playerInfo.getMP();
+        tempAllStatus[2] = sp = playerInfo.getfSP();
+        tempAllStatus[3] = atk = playerInfo.getfATK();
+        tempAllStatus[4] = df = playerInfo.getfDF();
+        tempAllStatus[5] = luk = playerInfo.getfLUK();
         //本来はidから生成された敵のステータスだが今回はサンプルボスのステータスを取得
-        tempEnemyStatus[0] = enemyHp = sampleBoss.getHp();
-        tempEnemyStatus[1] = enemySp = sampleBoss.getSp();
-        tempEnemyStatus[2] = enemyAtk = sampleBoss.getAtk();
-        tempEnemyStatus[3] = enemyDf = sampleBoss.getDf();
-        tempEnemyStatus[4] = enemyLuk = sampleBoss.getLuk();
+        tempAllStatus[6] = enemyHp = sampleBoss.getHp();
+        tempAllStatus[7] = enemySp = sampleBoss.getSp();
+        tempAllStatus[8] = enemyAtk = sampleBoss.getAtk();
+        tempAllStatus[9] = enemyDf = sampleBoss.getDf();
+        tempAllStatus[10] = enemyLuk = sampleBoss.getLuk();
         //本来はrealmからデータを受け取って表示
         spBar.setProgress(100-60);
         mpBar.setProgress(100-90);
@@ -100,21 +99,19 @@ public class BattleActivity extends AppCompatActivity {
 
     //PlayerSkillクラスとWeaponクラスからskillを受け取って実行し、tempに処理後のデータを保存
     //引数はnormalAttackなら0,skill1なら1,skill2なら2,playerSkill1なら4...といった感じで数字に対応した技を出す。
-    //技はプレイヤーが選んだ際に武器クラス
-    //敵のステータスは初期値のみ敵クラスから受け取り変更はすべてこのクラスで行う
     void setPlayerBehavior(int num) {
         switch (num){
             case 0:
-                tempEnemyStatus[0] = tempEnemyStatus[0] - (tempPlayerStatus[3]+weapon.getAtk());
+                tempAllStatus[6] = tempAllStatus[6] - (tempAllStatus[3]+weapon.getAtk());
                 break;
             case 1:
-                tempEnemyStatus = weapon.skill1(tempEnemyStatus, tempPlayerStatus);
+                tempAllStatus = weapon.skill1(tempAllStatus);
                 break;
             case 2:
-                weapon.skill2(tempEnemyStatus, tempPlayerStatus);
+                weapon.skill2(tempAllStatus);
                 break;
             case 3:
-                weapon.skill3(tempEnemyStatus, tempPlayerStatus);
+                weapon.skill3(tempAllStatus);
                 break;
             case 4:
                 break;
@@ -129,21 +126,22 @@ public class BattleActivity extends AppCompatActivity {
 
     //tempを実際の値に代入
     void onDecision(){
-        tempPlayerStatus = sampleBoss.setEnemyBehavior(tempPlayerStatus);
-        hp = tempPlayerStatus[0];
-        mp = tempPlayerStatus[1];
-        sp = tempPlayerStatus[2];
-        atk = tempPlayerStatus[3];
-        df = tempPlayerStatus[4];
-        luk = tempPlayerStatus[5];
-        enemyHp = tempEnemyStatus[0];
-        enemySp = tempEnemyStatus[1];
-        enemyAtk = tempEnemyStatus[2];
-        enemyDf = tempEnemyStatus[3];
-        enemyLuk = tempEnemyStatus[4];
+        tempAllStatus = sampleBoss.setEnemyBehavior(tempAllStatus);
+        hp = tempAllStatus[0];
+        mp = tempAllStatus[1];
+        sp = tempAllStatus[2];
+        atk = tempAllStatus[3];
+        df = tempAllStatus[4];
+        luk = tempAllStatus[5];
+        enemyHp = tempAllStatus[6];
+        enemySp = tempAllStatus[7];
+        enemyAtk = tempAllStatus[8];
+        enemyDf = tempAllStatus[9];
+        enemyLuk = tempAllStatus[10];
     }
 
     //どちらかのhpが0以下になったらリザルト画面を表示する処理
+    //一時的にbattleTextに数値を表示しているが、実際はバーの値を変更
     //プログレスバーの値を変更する
     void executeBattle(){
         battleText.setText("自分のHPは" + String.valueOf(hp) + "敵のHPは" + String.valueOf(enemyHp));
