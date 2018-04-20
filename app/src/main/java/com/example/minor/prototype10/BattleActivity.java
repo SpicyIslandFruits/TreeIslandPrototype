@@ -18,6 +18,7 @@ import io.realm.Realm;
 /**
  * spの実装、ターンカウントの実装、mpの実装
  * 敵とのエンカウント方式の実装、intentから敵情報受け取り
+ * すべてのスキルには消費spと消費mpを書く
  */
 public class BattleActivity extends AppCompatActivity {
     Realm realm;
@@ -79,19 +80,7 @@ public class BattleActivity extends AppCompatActivity {
         });
         //今回は適当に色を入れているが実際は適宜色を作成して代入、色の作成方法は知恵袋参照
         breakGage.setData(50, "%", ContextCompat.getColor(this, R.color.colorAccent), 50, true);
-        //ここは後でメソッドにまとめる
-        tempAllStatus[0] = hp = playerInfo.getHP();
-        tempAllStatus[1] = mp = playerInfo.getMP();
-        tempAllStatus[2] = sp = playerInfo.getfSP();
-        tempAllStatus[3] = atk = playerInfo.getfATK();
-        tempAllStatus[4] = df = playerInfo.getfDF();
-        tempAllStatus[5] = luk = playerInfo.getfLUK();
-        //本来はidから生成された敵のステータスだが今回はサンプルボスのステータスを取得
-        tempAllStatus[6] = enemyHp = enemy.getHp();
-        tempAllStatus[7] = enemySp = enemy.getSp();
-        tempAllStatus[8] = enemyAtk = enemy.getAtk();
-        tempAllStatus[9] = enemyDf = enemy.getDf();
-        tempAllStatus[10] = enemyLuk = enemy.getLuk();
+        inputAllStatus();
         //本来はrealmからデータを受け取って表示、spとmpは"最大値-現在の値"という形で書く
         hpBar.setMax(100);
         mpBar.setMax(100);
@@ -108,7 +97,8 @@ public class BattleActivity extends AppCompatActivity {
     void setPlayerBehavior(int num) {
         switch (num){
             case 0:
-                tempAllStatus[6] = tempAllStatus[6] - (tempAllStatus[3]);
+                tempAllStatus[6] = tempAllStatus[6] - tempAllStatus[3];
+                tempAllStatus[2] = tempAllStatus[2] - 30;
                 break;
             case 1:
                 tempAllStatus = weapon.skill1(tempAllStatus);
@@ -155,5 +145,19 @@ public class BattleActivity extends AppCompatActivity {
         if(hp<=0 ||enemyHp<=0){
             finish();
         }
+    }
+
+    void inputAllStatus(){
+        tempAllStatus[0] = hp = playerInfo.getHP();
+        tempAllStatus[1] = mp = playerInfo.getMP();
+        tempAllStatus[2] = sp = playerInfo.getfSP();
+        tempAllStatus[3] = atk = playerInfo.getfATK();
+        tempAllStatus[4] = df = playerInfo.getfDF();
+        tempAllStatus[5] = luk = playerInfo.getfLUK();
+        tempAllStatus[6] = enemyHp = enemy.getHp();
+        tempAllStatus[7] = enemySp = enemy.getSp();
+        tempAllStatus[8] = enemyAtk = enemy.getAtk();
+        tempAllStatus[9] = enemyDf = enemy.getDf();
+        tempAllStatus[10] = enemyLuk = enemy.getLuk();
     }
 }

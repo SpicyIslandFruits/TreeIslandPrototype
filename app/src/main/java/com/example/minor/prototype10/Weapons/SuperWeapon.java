@@ -33,6 +33,7 @@ abstract public class SuperWeapon {
         newAllStatus[9] = newEnemyDf;
         newAllStatus[10] = newEnemyLuk;
     }
+
     abstract public int[] skill1(int[] tempAllStatus);
     abstract public int[] skill2(int[] tempAllStatus);
     abstract public int[] skill3(int[] tempAllStatus);
