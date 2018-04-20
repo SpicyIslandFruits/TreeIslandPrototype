@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity{
             playerInfo.setPlayerLevel(0);
             playerInfo.setPosition(1);
             playerInfo.setMoney(100);
-            playerInfo.setMaxHP(100);
+            playerInfo.setFmaxHP(100);
             playerInfo.setHP(100);
-            playerInfo.setMaxMP(100);
+            playerInfo.setFmaxMP(100);
             playerInfo.setMP(100);
             playerInfo.setSP(10);
             playerInfo.setfSP(10);

@@ -7,7 +7,7 @@ package com.example.minor.prototype10.Enemys;
  * 後で要素を追加するときは先にSuperEnemyにメソッドを追加してください
  */
 public class SampleBoss extends SuperEnemy {
-    private static final int hp = 100, sp = 10, atk = 10, df = 100, luk = 100;
+    private static final int hp = 500, sp = 10, atk = 10, df = 100, luk = 100;
 
     public int getHp() {
         return hp;
