@@ -19,6 +19,7 @@ public class SampleWeapon extends SuperWeapon {
     public int[] skill1(int[] tempAllStatus){
         beginTransaction(tempAllStatus);
         newEnemyHp = enemyHp - (playerAtk)*2;
+        newPlayerSp = playerSp - 3;
         commitTransaction();
         return newAllStatus;
     }

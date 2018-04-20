@@ -35,7 +35,7 @@ public class BattleActivity extends AppCompatActivity {
     ImageButton playerSkill1Button, playerSkill2Button, playerSkill3Button, playerSkill4Button;
     public int[] tempAllStatus;
     private int hp, mp, sp, atk, df, luk, enemyHp, enemySp, enemyAtk, enemyDf, enemyLuk;
-    private int turnCount;
+    private int turnCount = 0, tempTurnCount = 0;
 
     //skillButtonをfindViewByIdしてonClickにsetPlayerBehaviorを入れる
     @Override
@@ -86,46 +86,31 @@ public class BattleActivity extends AppCompatActivity {
         mpBar.setMax(100);
         spBar.setMax(100);
         enemyHpBar.setMax(100);
-        spBar.setProgress(100-60);
+        spBar.setProgress(100);
         mpBar.setProgress(100-90);
         hpBar.setProgress(100);
         enemyHpBar.setProgress(100);
     }
 
-    //PlayerSkillクラスとWeaponクラスからskillを受け取って実行し、tempに処理後のデータを保存
-    //case4以降にはtempAllStatus = playerSkill"X".skillを書く
     void setPlayerBehavior(int num) {
-        switch (num){
-            case 0:
-                tempAllStatus[6] = tempAllStatus[6] - tempAllStatus[3];
-                tempAllStatus[2] = tempAllStatus[2] - 30;
-                break;
-            case 1:
-                tempAllStatus = weapon.skill1(tempAllStatus);
-                break;
-            case 2:
-                tempAllStatus = weapon.skill2(tempAllStatus);
-                break;
-            case 3:
-                tempAllStatus = weapon.skill3(tempAllStatus);
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
+        if(turnCount != tempTurnCount){
+            startNewTurn();
+            executeTempBattle(num);
+            tempTurnCount = turnCount;
+        }else{
+            executeTempBattle(num);
         }
     }
 
-    //tempを実際の値に代入
+    //tempを実際の値に代入、後でspの処理を見直す
     void onDecision(){
         tempAllStatus = enemy.setEnemyBehavior(tempAllStatus);
         hp = tempAllStatus[0];
         mp = tempAllStatus[1];
         sp = tempAllStatus[2];
+        //spは毎ターン回復する仕様だがスキルによって最大値をいじれる仕様なので後で細かく実装するが
+        //今の段階ではターン終了時にRealm内のsp最大値に戻すことにする
+        sp = playerInfo.getfSP();
         atk = tempAllStatus[3];
         df = tempAllStatus[4];
         luk = tempAllStatus[5];
@@ -134,6 +119,7 @@ public class BattleActivity extends AppCompatActivity {
         enemyAtk = tempAllStatus[8];
         enemyDf = tempAllStatus[9];
         enemyLuk = tempAllStatus[10];
+        turnCount++;
     }
 
     //どちらかのhpが0以下になったらリザルト画面を表示する処理
@@ -144,6 +130,51 @@ public class BattleActivity extends AppCompatActivity {
         enemyHpBar.setProgress(enemyHp);
         if(hp<=0 ||enemyHp<=0){
             finish();
+        }
+    }
+
+    //ここは後で調整する
+    //PlayerSkillクラスとWeaponクラスからskillを受け取って実行し、tempに処理後のデータを保存
+    //case4以降にはtempAllStatus = playerSkill"X".skillを書く
+    void executeTempBattle(int num){
+        switch (num){
+            case 0:
+                if(tempAllStatus[2] - 3 > 0) {
+                    tempAllStatus[6] = tempAllStatus[6] - tempAllStatus[3];
+                    tempAllStatus[2] = tempAllStatus[2] - 3;
+                }else{
+                    battleText.setText("spが足りません");
+                }
+                break;
+            case 1:
+                if(weapon.skill1(tempAllStatus)[2] > 0){
+                    tempAllStatus = weapon.skill1(tempAllStatus);
+                }else{
+                    battleText.setText("spが足りません");
+                }
+                break;
+            case 2:
+                if(weapon.skill2(tempAllStatus)[2] > 0){
+                    tempAllStatus = weapon.skill2(tempAllStatus);
+                }else{
+                    battleText.setText("spが足りません");
+                }
+                break;
+            case 3:
+                if(weapon.skill3(tempAllStatus)[2] > 0){
+                    tempAllStatus = weapon.skill3(tempAllStatus);
+                }else{
+                    battleText.setText("spが足りません");
+                }
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
         }
     }
 
@@ -159,5 +190,19 @@ public class BattleActivity extends AppCompatActivity {
         tempAllStatus[8] = enemyAtk = enemy.getAtk();
         tempAllStatus[9] = enemyDf = enemy.getDf();
         tempAllStatus[10] = enemyLuk = enemy.getLuk();
+    }
+
+    void startNewTurn(){
+        tempAllStatus[0] = hp;
+        tempAllStatus[1] = mp;
+        tempAllStatus[2] = sp;
+        tempAllStatus[3] = atk;
+        tempAllStatus[4] = df;
+        tempAllStatus[5] = luk;
+        tempAllStatus[6] = enemyHp;
+        tempAllStatus[7] = enemySp;
+        tempAllStatus[8] = enemyAtk;
+        tempAllStatus[9] = enemyDf;
+        tempAllStatus[10] = enemyLuk;
     }
 }
