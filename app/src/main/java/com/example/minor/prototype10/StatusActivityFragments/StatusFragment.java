@@ -15,9 +15,9 @@ import com.example.minor.prototype10.R;
 import io.realm.Realm;
 
 public class StatusFragment extends Fragment {
-    Realm realm;
-    PlayerInfo playerInfo;
-    TextView moneyValue, hpValue, mpValue, spValue, dfValue, lukValue, atkValue;
+    private Realm realm;
+    private PlayerInfo playerInfo;
+    private TextView moneyValue, hpValue, mpValue, spValue, dfValue, lukValue, atkValue;
     private int money;
     private int maxHP;
     private int HP;

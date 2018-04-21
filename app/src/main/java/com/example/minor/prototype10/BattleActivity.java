@@ -11,27 +11,37 @@ import android.widget.TextView;
 import com.example.minor.prototype10.Enemys.SampleBoss;
 import com.example.minor.prototype10.Enemys.SuperEnemy;
 import com.example.minor.prototype10.Models.PlayerInfo;
+import com.example.minor.prototype10.PlayerSkill.SampleSkill;
+import com.example.minor.prototype10.PlayerSkill.SuperSkill;
 import com.example.minor.prototype10.Weapons.SuperWeapon;
 
 import io.realm.Realm;
 
+/**
+ * spの実装、ターンカウントの実装、mpの実装、ブレイクゲージの実装
+ * 敵とのエンカウント方式の実装、intentから敵情報受け取り
+ * すべてのスキルには消費spと消費mpを書く
+ * 後でキャンセルボタンの追加を行う
+ */
 public class BattleActivity extends AppCompatActivity {
-    Realm realm;
-    PlayerInfo playerInfo;
-    ProgressBar hpBar, mpBar, spBar, enemyHpBar;
-    GaugeView breakGage;
-    TextView battleText;
-    MakeData makeData;
-    int weaponId;
-    int enemyId;
-    SuperEnemy enemy;
-    SuperWeapon weapon;
-    ImageButton decisionButton, normalAttackButton,skillButton1, skillButton2, skillButton3;
-    ImageButton playerSkill1Button, playerSkill2Button, playerSkill3Button, playerSkill4Button;
-    public int[] tempAllStatus;
-    private int hp, mp, sp, atk, df, luk, enemyHp, enemySp, enemyAtk, enemyDf, enemyLuk;
-    private int turnCount;
+    private Realm realm;
+    private PlayerInfo playerInfo;
+    private ProgressBar hpBar, mpBar, spBar, enemyHpBar;
+    private GaugeView breakGage;
+    private TextView battleText;
+    private MakeData makeData;
+    private int weaponId;
+    private int enemyId;
+    private SuperEnemy enemy;
+    private SuperWeapon weapon;
+    private SuperSkill playerSkill1, playerSkill2, playerSkill3, playerSkill4;
+    private ImageButton decisionButton, normalAttackButton,skillButton1, skillButton2, skillButton3;
+    private ImageButton playerSkill1Button, playerSkill2Button, playerSkill3Button, playerSkill4Button;
+    private int[] tempAllStatus;
+    private int maxHp, hp, maxMp, mp, sp, atk, df, luk, enemyHp, enemySp, enemyAtk, enemyDf, enemyLuk;
+    private int turnCount = 0, tempTurnCount = 0;
 
+    //skillButtonをfindViewByIdしてonClickにsetPlayerBehaviorを入れる
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +51,12 @@ public class BattleActivity extends AppCompatActivity {
         playerInfo = realm.where(PlayerInfo.class).findFirst();
         weaponId = playerInfo.getWeaponId();
         weapon = makeData.makeWeaponFromId(weaponId);
+        //一時的にサンプルスキルを使う本来は上に書いてあるweaponと同様の処理を行って自分の装備してあるスキルのインスタンスを取得する
+        playerSkill1 = new SampleSkill();
+        playerSkill2 = new SampleSkill();
+        playerSkill3 = new SampleSkill();
+        playerSkill4 = new SampleSkill();
+        //一時的にサンプルボスを使う、本来はintentから受けとったidを使ってMakeDataクラスのメソッドでインスタンスを取得する
         enemy = new SampleBoss();
         tempAllStatus = new int[11];
         hpBar = (ProgressBar) findViewById(R.id.hp_bar);
@@ -52,6 +68,12 @@ public class BattleActivity extends AppCompatActivity {
         decisionButton = (ImageButton) findViewById(R.id.decision_button);
         normalAttackButton = (ImageButton) findViewById(R.id.normal_attack);
         skillButton1 = (ImageButton) findViewById(R.id.skill1);
+        skillButton2 = (ImageButton) findViewById(R.id.skill2);
+        skillButton3 = (ImageButton) findViewById(R.id.skill3);
+        playerSkill1Button = (ImageButton) findViewById(R.id.player_skill1);
+        playerSkill2Button = (ImageButton) findViewById(R.id.player_skill2);
+        playerSkill3Button = (ImageButton) findViewById(R.id.player_skill3);
+        playerSkill4Button = (ImageButton) findViewById(R.id.player_skill4);
         decisionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +93,167 @@ public class BattleActivity extends AppCompatActivity {
                 setPlayerBehavior(1);
             }
         });
-        breakGage.setData(50, "%", ContextCompat.getColor(this, R.color.colorAccent), 50, true);
+        skillButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPlayerBehavior(2);
+            }
+        });
+        skillButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPlayerBehavior(3);
+            }
+        });
+        playerSkill1Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPlayerBehavior(4);
+            }
+        });
+        playerSkill2Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPlayerBehavior(5);
+            }
+        });
+        playerSkill3Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPlayerBehavior(6);
+            }
+        });
+        playerSkill4Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPlayerBehavior(7);
+            }
+        });
+        inputAllStatus();
+    }
+
+    //多分ここは編集の必要なし
+    void setPlayerBehavior(int num) {
+        if(turnCount != tempTurnCount){
+            startNewTurn();
+            executeTempBattle(num);
+            tempTurnCount = turnCount;
+        }else{
+            executeTempBattle(num);
+        }
+    }
+
+    //tempを実際の値に代入、ターンを進める、後でspの処理を見直す
+    void onDecision(){
+        tempAllStatus = enemy.setEnemyBehavior(tempAllStatus);
+        hp = tempAllStatus[0];
+        mp = tempAllStatus[1];
+        sp = tempAllStatus[2];
+        //spは毎ターン回復する仕様だがスキルによって最大値をいじれる仕様なので後で細かく実装するが
+        //今の段階ではターン終了時にRealm内のsp最大値に戻すことにする
+        sp = playerInfo.getfSP();
+        atk = tempAllStatus[3];
+        df = tempAllStatus[4];
+        luk = tempAllStatus[5];
+        enemyHp = tempAllStatus[6];
+        enemySp = tempAllStatus[7];
+        enemyAtk = tempAllStatus[8];
+        enemyDf = tempAllStatus[9];
+        enemyLuk = tempAllStatus[10];
+        turnCount++;
+    }
+
+    //どちらかのhpが0以下になったらリザルト画面を表示する処理
+    //ブレイクゲージのバーを変更する処理を後で追加する
+    void executeBattle(){
+        battleText.setText("自分のHPは" + String.valueOf(hp) + "敵のHPは" + String.valueOf(enemyHp));
+        hpBar.setProgress(hp);
+        enemyHpBar.setProgress(enemyHp);
+        spBar.setProgress(0);
+        mpBar.setProgress(maxMp-mp);
+        if(hp<=0 ||enemyHp<=0){
+            finish();
+        }
+    }
+
+    //ここは後で調整する、ブレイクゲージの影響も含めた計算はここで行うか、新しいメソッドを作ってそこで行う、
+    //ブレイクゲージの処理では受け取った最終ステータスにブレイク値の分だけ変更を加える
+    //PlayerSkillクラスとWeaponクラスからskillを受け取って実行し、tempに処理後のデータを保存
+    //セットしたスキルをスキル確認画面に表示するコードを書く
+    //mpが0未満になる場合の処理も追加する
+    void executeTempBattle(int num){
+        switch (num){
+            case 0:
+                if(tempAllStatus[2] - 3 >= 0) {
+                    tempAllStatus[6] = tempAllStatus[6] - tempAllStatus[3];
+                    tempAllStatus[2] = tempAllStatus[2] - (int)sp/3;
+                    spBar.setProgress(sp-tempAllStatus[2]);
+                }else{
+                    battleText.setText("spが足りません");
+                }
+                break;
+            case 1:
+                if(weapon.skill1(tempAllStatus)[2] >= 0){
+                    tempAllStatus = weapon.skill1(tempAllStatus);
+                    spBar.setProgress(sp - tempAllStatus[2]);
+                }else{
+                    battleText.setText("spが足りません");
+                }
+                break;
+            case 2:
+                if(weapon.skill2(tempAllStatus)[2] >= 0){
+                    tempAllStatus = weapon.skill2(tempAllStatus);
+                    spBar.setProgress(sp - tempAllStatus[2]);
+                }else{
+                    battleText.setText("spが足りません");
+                }
+                break;
+            case 3:
+                if(weapon.skill3(tempAllStatus)[2] >= 0){
+                    tempAllStatus = weapon.skill3(tempAllStatus);
+                    spBar.setProgress(sp - tempAllStatus[2]);
+                }else{
+                    battleText.setText("spが足りません");
+                }
+                break;
+            case 4:
+                if(playerSkill1.skill(tempAllStatus)[2] >= 0){
+                    tempAllStatus = playerSkill1.skill(tempAllStatus);
+                    spBar.setProgress(sp - tempAllStatus[2]);
+                }else{
+                    battleText.setText("spが足りません");
+                }
+                break;
+            case 5:
+                if(playerSkill2.skill(tempAllStatus)[2] >= 0){
+                    tempAllStatus = playerSkill2.skill(tempAllStatus);
+                    spBar.setProgress(sp - tempAllStatus[2]);
+                }else{
+                    battleText.setText("spが足りません");
+                }
+                break;
+            case 6:
+                if(playerSkill3.skill(tempAllStatus)[2] >= 0){
+                    tempAllStatus = playerSkill3.skill(tempAllStatus);
+                    spBar.setProgress(sp - tempAllStatus[2]);
+                }else{
+                    battleText.setText("spが足りません");
+                }
+                break;
+            case 7:
+                if(playerSkill4.skill(tempAllStatus)[2] >= 0){
+                    tempAllStatus = playerSkill4.skill(tempAllStatus);
+                    spBar.setProgress(sp - tempAllStatus[2]);
+                }else{
+                    battleText.setText("spが足りません");
+                }
+                break;
+        }
+    }
+
+    void inputAllStatus(){
+        maxHp = playerInfo.getFmaxHP();
+        maxMp = playerInfo.getFmaxMP();
         tempAllStatus[0] = hp = playerInfo.getHP();
         tempAllStatus[1] = mp = playerInfo.getMP();
         tempAllStatus[2] = sp = playerInfo.getfSP();
@@ -83,62 +265,30 @@ public class BattleActivity extends AppCompatActivity {
         tempAllStatus[8] = enemyAtk = enemy.getAtk();
         tempAllStatus[9] = enemyDf = enemy.getDf();
         tempAllStatus[10] = enemyLuk = enemy.getLuk();
-        hpBar.setMax(100);
-        mpBar.setMax(100);
-        spBar.setMax(100);
-        enemyHpBar.setMax(100);
-        spBar.setProgress(100-60);
-        mpBar.setProgress(100-90);
-        hpBar.setProgress(100);
-        enemyHpBar.setProgress(100);
-    }
-
-    void setPlayerBehavior(int num) {
-        switch (num){
-            case 0:
-                tempAllStatus[6] = tempAllStatus[6] - (tempAllStatus[3]);
-                break;
-            case 1:
-                tempAllStatus = weapon.skill1(tempAllStatus);
-                break;
-            case 2:
-                tempAllStatus = weapon.skill2(tempAllStatus);
-                break;
-            case 3:
-                tempAllStatus = weapon.skill3(tempAllStatus);
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-        }
-    }
-
-    void onDecision(){
-        tempAllStatus = enemy.setEnemyBehavior(tempAllStatus);
-        hp = tempAllStatus[0];
-        mp = tempAllStatus[1];
-        sp = tempAllStatus[2];
-        atk = tempAllStatus[3];
-        df = tempAllStatus[4];
-        luk = tempAllStatus[5];
-        enemyHp = tempAllStatus[6];
-        enemySp = tempAllStatus[7];
-        enemyAtk = tempAllStatus[8];
-        enemyDf = tempAllStatus[9];
-        enemyLuk = tempAllStatus[10];
-    }
-
-    void executeBattle(){
-        battleText.setText("自分のHPは" + String.valueOf(hp) + "敵のHPは" + String.valueOf(enemyHp));
+        //今回は適当に色を入れているが実際は適宜色を作成して代入、色の作成方法は知恵袋参照
+        breakGage.setData(50, "%", ContextCompat.getColor(this, R.color.colorAccent), 50, true);
+        hpBar.setMax(maxHp);
+        mpBar.setMax(maxMp);
+        spBar.setMax(sp);
+        enemyHpBar.setMax(enemyHp);
+        spBar.setProgress(0);
+        mpBar.setProgress(maxMp-mp);
         hpBar.setProgress(hp);
         enemyHpBar.setProgress(enemyHp);
-        if(hp<=0 ||enemyHp<=0){
-            finish();
-        }
+    }
+
+    //ここは編集の必要なし
+    void startNewTurn(){
+        tempAllStatus[0] = hp;
+        tempAllStatus[1] = mp;
+        tempAllStatus[2] = sp;
+        tempAllStatus[3] = atk;
+        tempAllStatus[4] = df;
+        tempAllStatus[5] = luk;
+        tempAllStatus[6] = enemyHp;
+        tempAllStatus[7] = enemySp;
+        tempAllStatus[8] = enemyAtk;
+        tempAllStatus[9] = enemyDf;
+        tempAllStatus[10] = enemyLuk;
     }
 }

@@ -307,7 +307,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@null"
-        android:onClick="onClickStatus"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintDimensionRatio="w,8:5"
         app:layout_constraintStart_toStartOf="@+id/guideline10"

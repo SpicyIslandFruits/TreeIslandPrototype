@@ -8,40 +8,76 @@ import android.widget.ImageButton;
 
 import com.example.minor.prototype10.Models.PlayerInfo;
 import com.example.minor.prototype10.Models.WeaponId;
+import com.example.minor.prototype10.OnClickMapButtons.OnClickBossRoomButton;
+import com.example.minor.prototype10.OnClickMapButtons.OnClickDungeonButton;
+import com.example.minor.prototype10.OnClickMapButtons.OnClickInnButton;
+import com.example.minor.prototype10.OnClickMapButtons.OnClickTownButton;
+import com.example.minor.prototype10.OnClickMapButtons.SuperOnClickMapButton;
 
 import io.realm.Realm;
 
+/**
+ * 武器、防具、アイテム、主人公スキル、マップの追加方法
+ * 1.それぞれのパッケージにクラスを追加、メソッドの実装、ゲッターを見て適当なメンバの追加
+ * 2.MakeDataクラスのswitch文にcaseを追加
+ * 3.idをRealmList<Weapon>にcreateObjectするイベントの作成
+ * 4.マップの場合はcreateMapメソッドの中ににどのマップとつながっているかを書く
+ */
+
 public class MainActivity extends AppCompatActivity{
-    Realm realm;
-    MapInfo mapInfo;
-    PlayerInfo playerInfo;
-    ImageButton imageButton;
+    private Realm realm;
+    private MakeData makeData;
+    private PlayerInfo playerInfo;
+    private ImageButton imageButton;
+    private int position;
+    private SuperOnClickMapButton onClickMapButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageButton = (ImageButton) findViewById(R.id.status_button);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickStatus(v);
+            }
+        });
         realm = Realm.getDefaultInstance();
-        mapInfo = new MapInfo(this);
+        makeData = new MakeData();
         createSaveData();
-        mapInfo.onGameStart();
+        gameStart();
     }
 
-    public void onClickStatus(View view){
+    private void onClickStatus(View view){
         startActivity(new Intent(this, StatusActivity.class));
     }
 
-    public void createSaveData(){
+    private void gameStart() {
+        realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                playerInfo = realm.where(PlayerInfo.class).findFirst();
+                position = playerInfo.getPosition();
+            }
+        });
+        onClickMapButton = makeData.makeMapFromPosition(position);
+        onClickMapButton.setDefaultInstances(this);
+        onClickMapButton.createMap();
+    }
+
+    //実際はmakePlayerStatusFromLevelメソッドにLevel0を代入して初期化します
+    private void createSaveData(){
         try {
             realm.beginTransaction();
             playerInfo = realm.createObject(PlayerInfo.class, new String("player"));
             playerInfo.setPlayerLevel(0);
             playerInfo.setPosition(1);
             playerInfo.setMoney(100);
-            playerInfo.setMaxHP(100);
+            playerInfo.setFmaxHP(100);
             playerInfo.setHP(100);
-            playerInfo.setMaxMP(100);
+            playerInfo.setFmaxMP(100);
             playerInfo.setMP(100);
             playerInfo.setSP(10);
             playerInfo.setfSP(10);
@@ -64,7 +100,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    public void onDestroy(){
+    protected void onDestroy(){
         super.onDestroy();
         realm.close();
     }

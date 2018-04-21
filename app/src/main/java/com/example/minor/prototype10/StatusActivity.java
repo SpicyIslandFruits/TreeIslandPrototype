@@ -14,14 +14,14 @@ import com.example.minor.prototype10.StatusActivityFragments.SkillFragment;
 import com.example.minor.prototype10.StatusActivityFragments.StatusFragment;
 
 public class StatusActivity extends AppCompatActivity {
-    ImageButton statusButton;
-    ImageButton equipmentButton;
-    ImageButton skillButton;
-    ImageButton itemButton;
-    ImageButton backButton;
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
-    Fragment statusFragment, equipmentFragment, skillFragment, itemFragment;
+    private ImageButton statusButton;
+    private ImageButton equipmentButton;
+    private ImageButton skillButton;
+    private ImageButton itemButton;
+    private ImageButton backButton;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+    private Fragment statusFragment, equipmentFragment, skillFragment, itemFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class StatusActivity extends AppCompatActivity {
         });
     }
 
-    public void ChangeFragment(View view){
+    private void ChangeFragment(View view){
         if (view == statusButton){
             fragmentManager = getFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
