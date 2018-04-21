@@ -17,12 +17,6 @@ import com.example.minor.prototype10.Weapons.SuperWeapon;
 
 import io.realm.Realm;
 
-/**
- * spの実装、ターンカウントの実装、mpの実装、ブレイクゲージの実装
- * 敵とのエンカウント方式の実装、intentから敵情報受け取り
- * すべてのスキルには消費spと消費mpを書く
- * 後でキャンセルボタンの追加を行う
- */
 public class BattleActivity extends AppCompatActivity {
     private Realm realm;
     private PlayerInfo playerInfo;
@@ -41,7 +35,6 @@ public class BattleActivity extends AppCompatActivity {
     private int maxHp, hp, maxMp, mp, sp, atk, df, luk, enemyHp, enemySp, enemyAtk, enemyDf, enemyLuk;
     private int turnCount = 0, tempTurnCount = 0;
 
-    //skillButtonをfindViewByIdしてonClickにsetPlayerBehaviorを入れる
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,12 +44,10 @@ public class BattleActivity extends AppCompatActivity {
         playerInfo = realm.where(PlayerInfo.class).findFirst();
         weaponId = playerInfo.getWeaponId();
         weapon = makeData.makeWeaponFromId(weaponId);
-        //一時的にサンプルスキルを使う本来は上に書いてあるweaponと同様の処理を行って自分の装備してあるスキルのインスタンスを取得する
         playerSkill1 = new SampleSkill();
         playerSkill2 = new SampleSkill();
         playerSkill3 = new SampleSkill();
         playerSkill4 = new SampleSkill();
-        //一時的にサンプルボスを使う、本来はintentから受けとったidを使ってMakeDataクラスのメソッドでインスタンスを取得する
         enemy = new SampleBoss();
         tempAllStatus = new int[11];
         hpBar = (ProgressBar) findViewById(R.id.hp_bar);
@@ -132,7 +123,6 @@ public class BattleActivity extends AppCompatActivity {
         inputAllStatus();
     }
 
-    //多分ここは編集の必要なし
     void setPlayerBehavior(int num) {
         if(turnCount != tempTurnCount){
             startNewTurn();
@@ -143,14 +133,11 @@ public class BattleActivity extends AppCompatActivity {
         }
     }
 
-    //tempを実際の値に代入、ターンを進める、後でspの処理を見直す
     void onDecision(){
         tempAllStatus = enemy.setEnemyBehavior(tempAllStatus);
         hp = tempAllStatus[0];
         mp = tempAllStatus[1];
         sp = tempAllStatus[2];
-        //spは毎ターン回復する仕様だがスキルによって最大値をいじれる仕様なので後で細かく実装するが
-        //今の段階ではターン終了時にRealm内のsp最大値に戻すことにする
         sp = playerInfo.getfSP();
         atk = tempAllStatus[3];
         df = tempAllStatus[4];
@@ -163,8 +150,6 @@ public class BattleActivity extends AppCompatActivity {
         turnCount++;
     }
 
-    //どちらかのhpが0以下になったらリザルト画面を表示する処理
-    //ブレイクゲージのバーを変更する処理を後で追加する
     void executeBattle(){
         battleText.setText("自分のHPは" + String.valueOf(hp) + "敵のHPは" + String.valueOf(enemyHp));
         hpBar.setProgress(hp);
@@ -176,11 +161,6 @@ public class BattleActivity extends AppCompatActivity {
         }
     }
 
-    //ここは後で調整する、ブレイクゲージの影響も含めた計算はここで行うか、新しいメソッドを作ってそこで行う、
-    //ブレイクゲージの処理では受け取った最終ステータスにブレイク値の分だけ変更を加える
-    //PlayerSkillクラスとWeaponクラスからskillを受け取って実行し、tempに処理後のデータを保存
-    //セットしたスキルをスキル確認画面に表示するコードを書く
-    //mpが0未満になる場合の処理も追加する
     void executeTempBattle(int num){
         switch (num){
             case 0:
@@ -265,7 +245,6 @@ public class BattleActivity extends AppCompatActivity {
         tempAllStatus[8] = enemyAtk = enemy.getAtk();
         tempAllStatus[9] = enemyDf = enemy.getDf();
         tempAllStatus[10] = enemyLuk = enemy.getLuk();
-        //今回は適当に色を入れているが実際は適宜色を作成して代入、色の作成方法は知恵袋参照
         breakGage.setData(50, "%", ContextCompat.getColor(this, R.color.colorAccent), 50, true);
         hpBar.setMax(maxHp);
         mpBar.setMax(maxMp);
@@ -277,7 +256,6 @@ public class BattleActivity extends AppCompatActivity {
         enemyHpBar.setProgress(enemyHp);
     }
 
-    //ここは編集の必要なし
     void startNewTurn(){
         tempAllStatus[0] = hp;
         tempAllStatus[1] = mp;

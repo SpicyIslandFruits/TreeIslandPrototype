@@ -1,8 +1,5 @@
 package com.example.minor.prototype10.PlayerSkill;
 
-/**
- * 消費spのほかに消費mpも書かなければいけないことに注意
- */
 public class SampleSkill extends SuperSkill {
     private static final int id = 0;
     private static final String name = "SampleWeapon";

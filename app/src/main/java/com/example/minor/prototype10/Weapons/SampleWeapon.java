@@ -1,13 +1,5 @@
 package com.example.minor.prototype10.Weapons;
 
-/**
- * 武器を追加したらMakeDataクラスでswitch文に処理を追加してください
- * 武器を取得するイベントを書いてください、取得する際にはPlayerInfoのweaponIdではなくRealmList<WeaponId>のほうにidを追加してください
- * playerAtkにはすでに武器装備時の攻撃力が代入されています
- * skillメソッドの中に処理を書いてください、spを消費させる処理を忘れないでください。
- * skillメソッドの処理はbeginTransactionとcommitTransactionで挟んでください
- * 後で要素を追加するときは先にSuperWeaponにメソッドを追加してください
- */
 public class SampleWeapon extends SuperWeapon {
     private static final int id = 0;
     private static final String name = "SampleWeapon";

@@ -16,14 +16,6 @@ import com.example.minor.prototype10.OnClickMapButtons.SuperOnClickMapButton;
 
 import io.realm.Realm;
 
-/**
- * 武器、防具、アイテム、主人公スキル、マップの追加方法
- * 1.それぞれのパッケージにクラスを追加、メソッドの実装、ゲッターを見て適当なメンバの追加
- * 2.MakeDataクラスのswitch文にcaseを追加
- * 3.idをRealmList<Weapon>にcreateObjectするイベントの作成
- * 4.マップの場合はcreateMapメソッドの中ににどのマップとつながっているかを書く
- */
-
 public class MainActivity extends AppCompatActivity{
     private Realm realm;
     private MakeData makeData;
@@ -67,7 +59,6 @@ public class MainActivity extends AppCompatActivity{
         onClickMapButton.createMap();
     }
 
-    //実際はmakePlayerStatusFromLevelメソッドにLevel0を代入して初期化します
     private void createSaveData(){
         try {
             realm.beginTransaction();
