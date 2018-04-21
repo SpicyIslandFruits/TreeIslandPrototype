@@ -24,20 +24,20 @@ import io.realm.Realm;
  * 後でキャンセルボタンの追加を行う
  */
 public class BattleActivity extends AppCompatActivity {
-    Realm realm;
-    PlayerInfo playerInfo;
-    ProgressBar hpBar, mpBar, spBar, enemyHpBar;
-    GaugeView breakGage;
-    TextView battleText;
-    MakeData makeData;
-    int weaponId;
-    int enemyId;
-    SuperEnemy enemy;
-    SuperWeapon weapon;
-    SuperSkill playerSkill1, playerSkill2, playerSkill3, playerSkill4;
-    ImageButton decisionButton, normalAttackButton,skillButton1, skillButton2, skillButton3;
-    ImageButton playerSkill1Button, playerSkill2Button, playerSkill3Button, playerSkill4Button;
-    public int[] tempAllStatus;
+    private Realm realm;
+    private PlayerInfo playerInfo;
+    private ProgressBar hpBar, mpBar, spBar, enemyHpBar;
+    private GaugeView breakGage;
+    private TextView battleText;
+    private MakeData makeData;
+    private int weaponId;
+    private int enemyId;
+    private SuperEnemy enemy;
+    private SuperWeapon weapon;
+    private SuperSkill playerSkill1, playerSkill2, playerSkill3, playerSkill4;
+    private ImageButton decisionButton, normalAttackButton,skillButton1, skillButton2, skillButton3;
+    private ImageButton playerSkill1Button, playerSkill2Button, playerSkill3Button, playerSkill4Button;
+    private int[] tempAllStatus;
     private int maxHp, hp, maxMp, mp, sp, atk, df, luk, enemyHp, enemySp, enemyAtk, enemyDf, enemyLuk;
     private int turnCount = 0, tempTurnCount = 0;
 

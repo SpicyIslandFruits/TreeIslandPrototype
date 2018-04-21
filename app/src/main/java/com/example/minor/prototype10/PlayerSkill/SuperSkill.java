@@ -5,7 +5,7 @@ abstract public class SuperSkill {
     protected int newPlayerHp, newPlayerMp, newPlayerSp, newPlayerAtk, newPlayerDf, newPlayerLuk, newEnemyHp, newEnemySp, newEnemyAtk, newEnemyDf, newEnemyLuk;
     protected int[] newAllStatus;
 
-    public void beginTransaction(int[] tempAllStatus){
+    protected void beginTransaction(int[] tempAllStatus){
         newAllStatus = new int[11];
         newPlayerHp = playerHp = tempAllStatus[0];
         newPlayerMp = playerMp = tempAllStatus[1];

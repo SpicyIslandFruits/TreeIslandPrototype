@@ -30,19 +30,19 @@ import io.realm.RealmResults;
  */
 
 public class EquipmentFragment extends Fragment {
-    Realm realm;
-    RealmResults<WeaponId> weaponIds;
-    RealmResults<ArmorId> armorIds;
-    WeaponId weaponIdInstance;
-    MakeData makeData;
-    SuperWeapon weapon;
-    PlayerInfo playerInfo;
-    WeaponAdapter weaponAdapter;
-    ArmorAdapter armorAdapter;
-    ListView weaponList, armorList;
-    TextView equipedWeapon, weaponName, weaponATK, weaponSkill1, weaponSkill2, weaponSkill3;
-    TextView equipedArmor, armorName, armorDF, armorSkill1, armorSkill2, armorSkill3;
-    int weaponId, armorId;
+    private Realm realm;
+    private RealmResults<WeaponId> weaponIds;
+    private RealmResults<ArmorId> armorIds;
+    private WeaponId weaponIdInstance;
+    private MakeData makeData;
+    private SuperWeapon weapon;
+    private PlayerInfo playerInfo;
+    private WeaponAdapter weaponAdapter;
+    private ArmorAdapter armorAdapter;
+    private ListView weaponList, armorList;
+    private TextView equipedWeapon, weaponName, weaponATK, weaponSkill1, weaponSkill2, weaponSkill3;
+    private TextView equipedArmor, armorName, armorDF, armorSkill1, armorSkill2, armorSkill3;
+    private int weaponId, armorId;
 
     @Nullable
     @Override

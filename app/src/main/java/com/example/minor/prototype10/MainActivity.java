@@ -17,14 +17,11 @@ import com.example.minor.prototype10.OnClickMapButtons.SuperOnClickMapButton;
 import io.realm.Realm;
 
 /**
- * 武器の追加方法(防具、アイテムも同様)
- * 1.武器クラスをWeaponsパッケージに追加、メソッドの実装、ゲッターを見て適当なメンバの追加
+ * 武器、防具、アイテム、主人公スキル、マップの追加方法
+ * 1.それぞれのパッケージにクラスを追加、メソッドの実装、ゲッターを見て適当なメンバの追加
  * 2.MakeDataクラスのswitch文にcaseを追加
- * 3.武器のidをRealmList<Weapon>にcreateObjectする処理の作成
- * マップの追加方法
- * 1.MapInfoクラス内にcreate(マップ名)メソッドの追加、マップ内での処理を書く
- * 2.MapInfoクラス内にonClickを実装したクラスonClick(マップ名)Buttonを書く
- * 3.追加するマップとつながっているマップのcreate(マップ名)メソッドを編集する
+ * 3.idをRealmList<Weapon>にcreateObjectするイベントの作成
+ * 4.マップの場合はcreateMapメソッドの中ににどのマップとつながっているかを書く
  */
 
 public class MainActivity extends AppCompatActivity{
@@ -40,6 +37,12 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageButton = (ImageButton) findViewById(R.id.status_button);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickStatus(v);
+            }
+        });
         realm = Realm.getDefaultInstance();
         makeData = new MakeData();
         createSaveData();
