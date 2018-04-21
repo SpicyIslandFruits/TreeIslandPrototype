@@ -1,5 +1,5 @@
 package com.example.minor.prototype10.OnClickMapButtons;
-
+//
 import android.content.Intent;
 import android.view.View;
 

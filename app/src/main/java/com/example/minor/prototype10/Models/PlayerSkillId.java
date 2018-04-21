@@ -1,5 +1,5 @@
 package com.example.minor.prototype10.Models;
-
+//
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 

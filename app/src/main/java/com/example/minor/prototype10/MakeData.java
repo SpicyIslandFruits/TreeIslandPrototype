@@ -1,5 +1,5 @@
 package com.example.minor.prototype10;
-
+//
 import com.example.minor.prototype10.OnClickMapButtons.SuperOnClickMapButton;
 import com.example.minor.prototype10.Weapons.SampleWeapon;
 import com.example.minor.prototype10.Weapons.SampleWeapon2;

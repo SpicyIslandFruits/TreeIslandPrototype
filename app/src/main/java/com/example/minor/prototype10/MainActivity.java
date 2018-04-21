@@ -1,5 +1,5 @@
 package com.example.minor.prototype10;
-
+//
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

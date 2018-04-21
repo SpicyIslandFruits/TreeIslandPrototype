@@ -1,5 +1,5 @@
 package com.example.minor.prototype10.Weapons;
-
+//
 public class SampleWeapon extends SuperWeapon {
     private static final int id = 0;
     private static final String name = "SampleWeapon";

@@ -1,5 +1,5 @@
 package com.example.minor.prototype10.OnClickMapButtons;
-
+//
 import android.view.View;
 
 public class OnClickInnButton extends SuperOnClickMapButton{

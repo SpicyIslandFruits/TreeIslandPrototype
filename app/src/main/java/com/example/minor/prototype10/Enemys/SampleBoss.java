@@ -1,5 +1,5 @@
 package com.example.minor.prototype10.Enemys;
-
+//
 public class SampleBoss extends SuperEnemy {
     private static final int hp = 600, sp = 10, atk = 10, df = 100, luk = 100;
 
